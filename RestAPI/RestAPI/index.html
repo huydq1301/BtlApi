@@ -1,0 +1,808 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+    <script type="text/javascript" src="Scripts/jquery-3.4.1.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+    <!-- End layout styles -->
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item nav-profile">
+                    <a href="#" class="nav-link">
+                        <div class="nav-profile-image">
+                            <img id="profileAnh" src="../assets/images/AvatarNV/macdinh.png" alt="profile">
+                            <span class="login-status online"></span>
+                            <!--change to offline or busy as needed-->
+                        </div>
+                        <div class="nav-profile-text d-flex flex-column">
+                            <span id="profileTen" class="font-weight-bold mb-2">Tên</span>
+                            <span id="profileCV" class="text-secondary text-small">Chức Vụ</span>
+                        </div>
+                        <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-primary btn-fw" id="loadsanpham" onclick="LoadSanPham()">Sản Phẩm</button>
+
+                </li>
+                <div><br /></div>
+                <li></li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-warning btn-fw" id="loadhoadon" onclick="LoadHoaDon()">Hóa Đơn Nhập</button>
+
+                </li>
+                <div><br /></div>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-info btn-fw" id="loadhoadonban" onclick="LoadHoaDonBan()">Hóa Đơn Bán</button>
+
+                </li>
+                <div><br /></div>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-success btn-fw" id="loadnhanvien" onclick="LoadNhanVien()">Nhân Viên</button>
+
+                </li>
+                <div><br /></div>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-danger btn-fw" id="loaddoanhthu" onclick="LoadDoanhThu()">Doanh Thu</button>
+                </li>
+            </ul>
+        </nav>
+        <!-- partial -->
+        <div class="content-wrapper">
+            <div>
+                <div class="row" id="form-table">
+
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-danger" id="thungrac" onclick="GetThungRac()">Thùng Rác</button>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-danger" id="quaylai" onclick="QuayLai()">Quay Lại</button>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-info" id="reset" onclick="Reset()">Reset</button>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-warning" id="btntimkiem" onclick="search()">Tìm Kiếm</button>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="my-select" class="form-control" style="background-color: gray">
+                            <option value="masp">Mã Sản Phẩm</option>
+                            <option value="tensp">Tên Sản Phẩm</option>
+                        </select>
+                        <input id="timkiem" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-12 stretch-card">
+
+                    <div class="card">
+                        <div class="card-body" >
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Mã Sản Phẩm</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Màu Sắc</th>
+                                        <th>Chất Liệu</th>
+                                        <th>Size</th>
+                                        <th>Nhà Cung Cấp</th>
+                                        <th>Số Lượng</th>
+                                        <th>Giá Bán</th>
+                                        <th>Giá Nhập</th>
+                                        <th colspan="2">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="AllSanPham"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- phân trang vào đây-->
+            <div class="row">
+                <div class="col-md-2">
+                    <br />
+                </div>
+                <div class="col-md-2">
+                    <br />
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <!--phân trang bên trên-->
+            <div class="page-header">
+                <div class="col-12 grid-margin stretch-card" id="form-nhap">
+                    <div class="card">
+                        <div class="card-body">
+                            <form class="forms-sample">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Mã Sản Phẩm</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="MaSP">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Tên Sản Phẩm</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="TenSP">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Nhà Cung Cấp</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="NCCSelect">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Màu Sắc</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="MauSacSelect">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Chất Liệu</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="ChatLieuSelect">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Size</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="SizeSelect">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Đơn Giá Nhập</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" class="form-control" id="GiaNhap" value="0">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Đơn Giá Bán</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" class="form-control" id="GiaBan" value="0">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Số Lượng</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" class="form-control" id="SoLuong" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleTextarea1">Ghi Chú</label>
+                                            <textarea class="form-control" id="GhiChu" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group row ">
+                                            <label>Ảnh Sản Phẩm</label>
+                                            <div class="col-md-3">
+                                                <img id="image-preview" style="width:150px; height:150px;" src="../assets/images/SanPham/macdinh.png" alt="Ảnh Sản Phẩm">
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <input type="file" id="image-input" accept=".jpg,.jpeg,.png" value="Chọn Ảnh Sản Phẩm" onchange="previewImage(event)">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <button type="button" class="btn btn-gradient-success" onclick="AddSanPham()" id="them">Thêm Mới</button>
+                                <a href="#form-table"> <button type="button" class="btn btn-gradient-primary btn-fw" id="luu" onclick="EditSanPham()">Lưu</button></a>
+                                <br /> <br />
+                                <button type="button" class="btn btn-info btn-fw" onclick="clearInput()">Hủy Bỏ</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script src="assets/vendors/chart.js/Chart.min.js"></script>
+        <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="assets/js/off-canvas.js"></script>
+        <script src="assets/js/hoverable-collapse.js"></script>
+        <script src="assets/js/misc.js"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page -->
+        <script src="assets/js/dashboard.js"></script>
+        <script src="assets/js/todolist.js"></script>
+        <script type="text/javascript">
+            let url = 'https://localhost:44344/api/';
+
+            let searchParams = new URLSearchParams(window.location.search);
+            let GetTen = searchParams.get("Ten");
+            let GetChucVu = searchParams.get("ChucVu");
+            let GetAnh = searchParams.get("Anh");
+            $(document).ready(function () { 
+                if (GetTen == "" || GetTen == null) {
+                    alert("Vui lòng đăng nhập");
+                    window.location.href = "../../login.html";
+                    return;
+                }
+                Load();
+            });
+            function Load() {
+                LoadUser();
+                //load du lieu
+                GetNCCList();
+                GetSizeList();
+                GetMauSacList();
+                GetChatLieuList();
+                GetSanPhamList();
+                document.getElementById("them").style.display = "block";
+                document.getElementById("luu").style.display = "none";
+                document.getElementById("quaylai").style.display = "none";
+            }
+            function QuayLai() {
+                document.getElementById("btntimkiem").style.display = "block";
+                document.getElementById("timkiem").style.display = "block";
+                document.getElementById("reset").style.display = "block";
+                document.getElementById("form-nhap").style.display = "block";
+                document.getElementById("thungrac").style.display = "block";
+                document.getElementById("quaylai").style.display = "none";
+                Load();
+            }
+            function GetThungRac() {
+                document.getElementById("btntimkiem").style.display = "none";
+                document.getElementById("timkiem").style.display = "none";
+                document.getElementById("reset").style.display = "none";
+                document.getElementById("form-nhap").style.display = "none";
+                document.getElementById("thungrac").style.display = "none";
+                document.getElementById("quaylai").style.display = "block";
+
+                $.ajax({
+                    url: url + "SanPham",
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        let table = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            if (data[i].IsDeleted == 1) {
+                                table = table + '<tr class="table-danger">';
+                                table = table + '<td>' + data[i].MaSP + '</td>';
+                                table = table + '<td>' + data[i].TenSP + '</td>';
+                                table = table + '<td>' + data[i].tblMauSac.TenMau + '</td>';
+                                table = table + '<td>' + data[i].tblChatLieu.TenChatLieu + '</td>';
+                                table = table + '<td>' + data[i].tblSize.TenSize + '</td>';
+                                table = table + '<td>' + data[i].tblNhaCungCap.TenNCC + '</td>';
+                                table = table + '<td>' + data[i].SoLuong + '</td>';
+                                table = table + '<td>' + data[i].DonGiaBan + '</td>';
+                                table = table + '<td>' + data[i].DonGiaNhap + '</td>';
+                                table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success btn-sm" onclick="KhoiPhuc(\'' + data[i].MaSP + '\')">Khôi Phục</button> </a></td>';
+                                table = table + '<td> <button type="button" class="btn btn-danger btn-sm"  onclick="Xoa(\'' + data[i].MaSP + '\')">Xóa</button> </td>';
+                                table = table + '</tr>';
+                            }
+                            
+                        }
+                        document.getElementById('AllSanPham').innerHTML = table;
+                    }
+                })
+
+            }
+            function KhoiPhuc(MaSP) {
+                if (confirm("Bạn có chắc muốn khôi phục?")) {
+                    $.ajax({
+                        url: url + "sanpham?id=" + MaSP + "&&xoa=0",
+                        method: 'PUT',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        error: function () {
+                            alert("Khôi phục sản phẩm có mã sản phẩm: " + MaSP + "không thành công ! ");
+                        },
+                        success: function () {
+                            alert("Khôi phục sản phẩm có mã sản phẩm: " + MaSP + " thành công!");
+                            GetThungRac();
+                        }
+                    })
+                }
+            }
+            function Xoa(MaSP) {
+                if (confirm("Bạn có chắc muốn xóa vĩnh viễn?")) {
+                    $.ajax({
+                        url: url + "sanpham?id=" + MaSP + "&&xoa=-1",
+                        method: 'PUT',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        error: function () {
+                            alert("Xóa vĩnh viễn sản phẩm có mã sản phẩm: " + MaSP + "không thành công ! ");
+                        },
+                        success: function () {
+                            alert("Xóa vĩnh viễn sản phẩm có mã sản phẩm: " + MaSP + " thành công!");
+                            GetThungRac();
+                        }
+                    })
+                }
+            }
+            function LoadSanPham() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../index.html" + queryString;
+            }
+            function LoadHoaDon() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../hoadon.html" + queryString;
+            }
+            function LoadHoaDonBan() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../hoadonban.html" + queryString;
+            }
+            function LoadNhanVien() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../nhanvien.html" + queryString;
+            }
+            function LoadUser() {
+                document.getElementById("profileTen").innerHTML = GetTen;
+                document.getElementById("profileCV").innerHTML = GetChucVu;
+                document.getElementById("profileAnh").src = "../assets/images/AvatarNV/"+GetAnh;
+
+            }
+            function LoadDoanhThu() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../doanhthu.html" + queryString;
+            }
+            function previewImage(event) {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var preview = document.getElementById('image-preview');
+                    preview.src = reader.result;
+                }
+                reader.readAsDataURL(event.target.files[0]);
+            }
+            function GetNCCList() {
+                $.ajax({
+                    url: url + "nhacungcap",
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        let options = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            options = options + '<option value="' + data[i].MaNCC + '">' + data[i].TenNCC + '</option>';
+                        }
+                        $('#NCCSelect').html(options).prepend('<option value="" disabled selected hidden>--Chọn Tên Nhà Cung Cấp--</option>');
+                    }
+                })
+            }
+            function GetSizeList() {
+                $.ajax({
+                    url: url + "size",
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        let options = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            options = options + '<option value="' + data[i].MaSize + '">' + data[i].TenSize + '</option>';
+                        }
+                        $('#SizeSelect').html(options).prepend('<option value="" disabled selected hidden>--Chọn Size--</option>');
+                    }
+                })
+            }
+            function GetMauSacList() {
+                $.ajax({
+                    url: url + "mausac",
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        let options = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            options = options + '<option value="' + data[i].MaMauSac + '">' + data[i].TenMau + '</option>';
+                        }
+                        $('#MauSacSelect').html(options).prepend('<option value="" disabled selected hidden>--Chọn Màu Sắc--</option>');
+                    }
+                })
+            }
+            function GetChatLieuList() {
+                $.ajax({
+                    url: url + "chatlieu",
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        let options = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            options = options + '<option value="' + data[i].MaChatLieu + '">' + data[i].TenChatLieu + '</option>';
+                        }
+                        $('#ChatLieuSelect').html(options).prepend('<option value="" disabled selected hidden>--Chọn Chất Liệu--</option>');
+                    }
+                })
+            }
+            //lấy thông tin từ bảng sản phẩm
+            function GetSanPhamList() {
+                $.ajax({
+                    url: url + "SanPham",
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        let table = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            if (data[i].IsDeleted == 0) {
+                                if (i % 3 == 0) {
+                                    table = table + '<tr class="table-info">';
+                                }
+                                else if (i % 3 == 1) {
+                                    table = table + '<tr class="table-warning">';
+                                }
+                                table = table + '<td>' + data[i].MaSP + '</td>';
+                                table = table + '<td>' + data[i].TenSP + '</td>';
+                                table = table + '<td>' + data[i].tblMauSac.TenMau + '</td>';
+                                table = table + '<td>' + data[i].tblChatLieu.TenChatLieu + '</td>';
+                                table = table + '<td>' + data[i].tblSize.TenSize + '</td>';
+                                table = table + '<td>' + data[i].tblNhaCungCap.TenNCC + '</td>';
+                                table = table + '<td>' + data[i].SoLuong + '</td>';
+                                table = table + '<td>' + data[i].DonGiaBan + '</td>';
+                                table = table + '<td>' + data[i].DonGiaNhap + '</td>';
+                                table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success btn-sm" onclick="GetSanPham(\'' + data[i].MaSP + '\')">Chi tiết</button> </a></td>';
+                                table = table + '<td> <button type="button" class="btn btn-danger btn-sm"  onclick="DeleteSanPham(\'' + data[i].MaSP + '\')">Xóa</button> </td>';
+                                table = table + '</tr>';
+                            }
+                        }
+                        document.getElementById('AllSanPham').innerHTML = table;
+                    }
+                })
+            }
+            //chi tiet 1 sanpham theo mã sp khi ấn vào chi tiết
+            function GetSanPham(MaSP) {
+                document.getElementById("them").style.display = "none";
+                document.getElementById("luu").style.display = "block";
+                $.ajax({
+                    url: url + "sanpham/" + MaSP,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#MaSP").val(data.MaSP).prop('disabled', true);
+                        $("#MaSP").val(data.MaSP),
+                            $("#TenSP").val(data.TenSP),
+                            $("#NCCSelect").val(data.MaNCC),
+                            $("#SizeSelect").val(data.MaSize),
+                            $("#MauSacSelect").val(data.MaMauSac),
+                            $("#ChatLieuSelect").val(data.MaChatLieu),
+                            $("#SoLuong").val(data.SoLuong),
+                            $("#GiaNhap").val(data.DonGiaNhap),
+                            $("#GiaBan").val(data.DonGiaBan),
+                            $("#Anh").val(data.Anh),
+                            $("#GhiChu").val(data.GhiChu)
+                        if (data.Anh == null || data.Anh == '') {
+                            data.Anh = "macdinh.png";
+                        }
+                        document.getElementById('image-preview').src = "../assets/images/SanPham/" + data.Anh;
+                    }
+
+                })
+            }
+            //kiểm tra xem người dùng đã nhập đủ thông tin chưa
+            function validateInput() {
+                var MaSP = $("#MaSP").val();
+                var TenSP = $("#TenSP").val();
+                var NCC = $("#NCCSelect").val();
+                var MauSac = $("#MauSacSelect").val();
+                var ChatLieu = $("#ChatLieuSelect").val();
+                var Size = $("#SizeSelect").val();
+                var SoLuong = $("#SoLuong").val();
+                var GiaNhap = $("#GiaNhap").val();
+                var GiaBan = $("#GiaBan").val();
+                var Anh = $("#image-input").val();
+                if (MaSP == '' || MaSP==null || TenSP == '' || NCC == '' || Size == '' || MauSac == '' || ChatLieu == '' || SoLuong == null || GiaNhap == null || GiaBan == null ) {
+                    alert('Vui lòng nhập đầy đủ thông tin!');
+                    return false;
+                }
+                return true;
+            }
+            //clear
+            function clearInput() {
+                document.getElementById("them").style.display = "block";
+                document.getElementById("luu").style.display = "none";
+                document.getElementById("MaSP").disabled = false;
+                $("#MaSP").val("");
+                $("#TenSP").val("");
+                $("#NCCSelect").val("");
+                $("#MauSacSelect").val("");
+                $("#ChatLieuSelect").val("");
+                $("#SizeSelect").val("");
+                $("#SoLuong").val("0");
+                $("#GiaNhap").val("0");
+                $("#GiaBan").val("0");
+                $("#fileanh").val("");
+                $("#GhiChu").val("");
+
+            }
+            //reset
+            function Reset() {
+                GetSanPhamList();
+                document.getElementById("timkiem").value = "";
+            }
+            //thêm sanpham
+            function AddSanPham() {
+                if (!validateInput()) {
+                    return;
+                }
+
+                var MaSP = $("#MaSP").val();
+                // Kiểm tra xem mã sp đã tồn tại hay chưa
+                $.ajax({
+                    url: url + "sanpham/" + MaSP,
+                    method: "GET",
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res != null) {
+                            alert("Mã sản phẩm đã tồn tại!");
+                            return;
+                        }
+                        const file = $("#image-input").val();
+                        const fileAnh = file.split("\\");
+                        // Thêm sp mới
+                        $.ajax({
+                            url: url + "sanpham",
+                            method: "POST",
+                            data: JSON.stringify({
+                                "MaSP": $("#MaSP").val(),
+                                "TenSP": $("#TenSP").val(),
+                                "MaNCC": $("#NCCSelect").val(),
+                                "MaMauSac": $("#MauSacSelect").val(),
+                                "MaChatLieu": $("#ChatLieuSelect").val(),
+                                "MaSize": $("#SizeSelect").val(),
+                                "SoLuong": $("#SoLuong").val(),
+                                "DonGiaNhap": $("#GiaNhap").val(),
+                                "DonGiaBan": $("#GiaBan").val(),
+                                "GhiChu": $("#GhiChu").val(),
+                                "Anh": fileAnh[fileAnh.length - 1]
+                            }),
+                            contentType: 'application/json',
+                            dataType: 'json',
+                            error: function (res) {
+                                alert("Thêm mới không thành công!");
+                                console.log(0);
+                            },
+                            success: function (res) {
+                                alert("Thêm mới thành công!");
+                                GetSanPhamList();
+                                console.log(1);
+                                // xóa dữ liệu trên các ô vừa điền sau khi thêm mới thành công
+                                clearInput();
+                            }
+                        });
+                    },
+                    error: function (res) {
+                        alert("Có lỗi xảy ra khi kiểm tra mã sản phẩm!");
+                    }
+                });
+            }
+            //sua 1 san pham
+            function EditSanPham() {
+                if (!validateInput()) {
+                    return;
+                }
+                const file = $("#image-input").val();
+                const fileAnh = file.split("\\");
+                if (confirm("Bạn có chắc muốn sửa?")) {
+                    var MaSP = $("#MaSP").val();
+                    $.ajax({
+                        url: url + "sanpham/" + MaSP,
+                        method: "PUT",
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        data: JSON.stringify({
+                            "MaSP": $("#MaSP").val(),
+                            "TenSP": $("#TenSP").val(),
+                            "MaNCC": $("#NCCSelect").val(),
+                            "MaMauSac": $("#MauSacSelect").val(),
+                            "MaChatLieu": $("#ChatLieuSelect").val(),
+                            "MaSize": $("#SizeSelect").val(),
+                            "SoLuong": $("#SoLuong").val(),
+                            "DonGiaNhap": $("#GiaNhap").val(),
+                            "DonGiaBan": $("#GiaBan").val(),
+                            "GhiChu": $("#GhiChu").val(),
+                            "Anh": fileAnh[fileAnh.length - 1]
+                        }),
+                        error: function (data) {
+                            alert("Sửa không thành công!");
+                        },
+                        success: function (data) {
+                            alert("Sửa thành công!");
+                            GetSanPhamList();
+                            // xóa dữ liệu trên các ô vừa điền sau khi thêm mới thành công
+                            clearInput();
+                        }
+                    });
+                }
+            }
+            //tim kiem theo tên
+            function searchSPByName() {
+                var name = $("#timkiem").val();
+                if (name == "") {
+                    alert("Vui lòng nhập tên sản phẩm !");
+                    return;
+                }
+                $.ajax({
+                    url: url + "sanpham?name=" + name,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.length <= 0) {
+                            alert("Không có sản phẩm cần tìm !");
+                            $("#timkiem").val("");
+                            return;
+
+                        }
+                        let table = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            if (data[i].IsDeleted == 0) {
+                                if (i % 3 == 0) {
+                                    table = table + '<tr class="table-info">';
+                                }
+                                else if (i % 3 == 1) {
+                                    table = table + '<tr class="table-warning">';
+                                } else {
+                                    table = table + '<tr class="table-danger">';
+                                }
+                                table = table + '<td>' + data[i].MaSP + '</td>';
+                                table = table + '<td>' + data[i].TenSP + '</td>';
+                                table = table + '<td>' + data[i].tblMauSac.TenMau + '</td>';
+                                table = table + '<td>' + data[i].tblChatLieu.TenChatLieu + '</td>';
+                                table = table + '<td>' + data[i].tblSize.TenSize + '</td>';
+                                table = table + '<td>' + data[i].tblNhaCungCap.TenNCC + '</td>';
+                                table = table + '<td>' + data[i].SoLuong + '</td>';
+                                table = table + '<td>' + data[i].DonGiaNhap + '</td>';
+                                table = table + '<td>' + data[i].DonGiaBan + '</td>';
+                                table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success" onclick="GetSanPham(\'' + data[i].MaSP + '\')">Chi tiết</button> </a></td>';
+                                table = table + '<td> <button type="button" class="btn btn-danger" onclick="DeleteSanPham(\'' + data[i].MaSP + '\')">Xóa</button> </td>';
+                                table = table + '</tr>';
+                            }
+                            
+                        }
+                        document.getElementById('AllSanPham').innerHTML = table;
+                    },
+                    error: function (data) {
+                        alert("Lỗi khi tìm kiếm tên sản phẩm!");
+                    }
+                });
+            }
+            //tim kiem theo ma
+            function searchSPByID() {
+                var MaSP = $("#timkiem").val();
+                if (MaSP == "") {
+                    alert("Vui lòng nhập mã sản phẩm !");
+                    return;
+                }
+                $.ajax({
+                    url: url + "sanpham/" + MaSP,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    error: function (data) {
+                        alert("Không có sản phẩm cần tìm !");
+                        $("#timkiem").val("");
+                        console.log(0);
+                    },
+                    success: function (data) {
+                        let table = '';
+                        if (data.IsDeleted == 0) {
+
+                            table = table + '<td>' + data.MaSP + '</td>';
+                            table = table + '<td>' + data.TenSP + '</td>';
+                            table = table + '<td>' + data.tblMauSac.TenMau + '</td>';
+                            table = table + '<td>' + data.tblChatLieu.TenChatLieu + '</td>';
+                            table = table + '<td>' + data.tblSize.TenSize + '</td>';
+                            table = table + '<td>' + data.tblNhaCungCap.TenNCC + '</td>';
+                            table = table + '<td>' + data.SoLuong + '</td>';
+                            table = table + '<td>' + data.DonGiaNhap + '</td>';
+                            table = table + '<td>' + data.DonGiaBan + '</td>';
+                            table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success" onclick="GetSanPham(\'' + data.MaSP + '\')">Chi tiết</button> </a></td>';
+                            table = table + '<td> <button type="button" class="btn btn-danger" onclick="DeleteSanPham(\'' + data.MaSP + '\')">Xóa</button> </td>';
+                            table = table + '</tr>';
+                        }
+                        document.getElementById('AllSanPham').innerHTML = table;
+                        console.log(1);
+
+                    }
+                });
+            }
+            //option tim kiem
+            function search() {
+                var selectElement = document.getElementById("my-select");
+                var selectedValue = selectElement.value;
+                if (selectedValue == "masp") {
+                    searchSPByID();
+                } else {
+                    searchSPByName();
+                }
+
+            }
+            //xoa 1 san pham
+            function DeleteSanPham(MaSP) {
+                if (confirm("Bạn có chắc muốn xóa?")) {
+                    $.ajax({
+                        url: url + "sanpham?id=" + MaSP +"&&xoa=1" ,
+                        method: 'PUT',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        error: function () {
+                            alert("Xóa sản phẩm có mã sản phẩm: " + MaSP + "không thành công ! ");
+                        },
+                        success: function () {
+                            alert("Xóa sản phẩm có mã sản phẩm: " + MaSP + " thành công!");
+                            GetSanPhamList();
+                        }
+                    })
+                }
+            }
+        </script>
+        <!-- End custom js for this page -->
+</html >

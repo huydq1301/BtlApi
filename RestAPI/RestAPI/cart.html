@@ -1,0 +1,292 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="AssetsUser/css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="AssetsUser/css/icomoon.css">
+    <!-- Ion Icon Fonts-->
+    <link rel="stylesheet" href="AssetsUser/css/ionicons.min.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="AssetsUser/css/bootstrap.min.css">
+
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="AssetsUser/css/magnific-popup.css">
+
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="AssetsUser/css/flexslider.css">
+    <script type="text/javascript" src="Scripts/jquery-3.4.1.js"></script>
+
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="AssetsUser/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="AssetsUser/css/owl.theme.default.min.css">
+
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="AssetsUser/css/bootstrap-datepicker.css">
+    <!-- Flaticons  -->
+    <link rel="stylesheet" href="AssetsUser/fonts/flaticon/font/flaticon.css">
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="AssetsUser/css/style.css">
+
+</head>
+<body>
+
+    <div class="colorlib-loader"></div>
+
+    <div id="page">
+        <nav class="colorlib-nav" role="navigation">
+            <div class="top-menu">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 text-left menu-1">
+                            <ul>
+                                <li><button type="button" onclick="loadhome()">Home</button></li>
+                                <li class="cart"><button type="button" onclick="loadcart()"><i class="icon-shopping-cart"></i> Cart [0]</button></li>
+                                <li><button type="button" onclick="loadprofile()">Profile</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row row-pb-lg">
+                <div class="col-md-12">
+                    <div class="product-name d-flex">
+                        <div class="one-forth text-left px-4">
+                            <span>Product Details</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Price</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Quantity</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Total</span>
+                        </div>
+                        <div class="one-eight text-center px-4">
+                            <span>Remove</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" id="AllSanPham">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <p class="addtocart"><button type="button" onclick="MuaSP()" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Mua </button></p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+    </div>
+
+    <!-- jQuery -->
+    <script src="AssetsUser/js/jquery.min.js"></script>
+    <!-- popper -->
+    <script src="AssetsUser/js/popper.min.js"></script>
+    <!-- bootstrap 4.1 -->
+    <script src="AssetsUser/js/bootstrap.min.js"></script>
+    <!-- jQuery easing -->
+    <script src="AssetsUser/js/jquery.easing.1.3.js"></script>
+    <!-- Waypoints -->
+    <script src="AssetsUser/js/jquery.waypoints.min.js"></script>
+    <!-- Flexslider -->
+    <script src="AssetsUser/js/jquery.flexslider-min.js"></script>
+    <!-- Owl carousel -->
+    <script src="AssetsUser/js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="AssetsUser/js/jquery.magnific-popup.min.js"></script>
+    <script src="AssetsUser/js/magnific-popup-options.js"></script>
+    <!-- Date Picker -->
+    <script src="AssetsUser/js/bootstrap-datepicker.js"></script>
+    <!-- Stellar Parallax -->
+    <script src="AssetsUser/js/jquery.stellar.min.js"></script>
+    <!-- Main -->
+    <script src="AssetsUser/js/main.js"></script>
+    <script type="text/javascript">
+        var k = 0;
+        let url = 'https://localhost:44344/api/';
+        let searchParams = new URLSearchParams(window.location.search);
+        let SoLuong = 0;
+        let GetTen = searchParams.get("Ten");
+        let GetAnh = searchParams.get("Anh");
+        let GetMa = searchParams.get("Ma");
+        $(document).ready(function () {
+            if (GetTen == "" || GetTen == null) {
+                alert("Vui lòng đăng nhập");
+                window.location.href = "../../loginkh.html";
+                return;
+            }
+            GetGioHang();
+        });
+        function MuaSP() {
+            $.ajax({
+                url: url + "GioHang",
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (res) {
+                    var dem = 0;
+                    for (var i = 0; i < res.length; ++i) {
+                        if (res[i].IsShopped == 0 && res[i].MaKH==GetMa) {
+                            dem = 1;
+                        }
+                    }
+                    if (dem == 0) {
+                        alert("Chưa có sản phẩm nào trong giỏ hàng");
+                        loadhome();
+                    }
+                    else {
+                        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                        var MaHDB = 'hnb';
+                        for (var i = 0; i < 3; i++) {
+                            var randomIndex = Math.floor(Math.random() * chars.length);
+                            MaHDB += chars[randomIndex];
+                        }
+                        var now = new Date();
+                        var formattedDate = now.getFullYear() + '-' + (now.getMonth() + 1).toString().padStart(2, '0') + '-' + now.getDate().toString().padStart(2, '0');
+                        var dateTime = formattedDate;
+                        $.ajax({
+                            url: url + "hoadonban",
+                            method: "POST",
+                            data: JSON.stringify({
+                                "MaHDB": MaHDB,
+                                "NgayBan": dateTime,
+                                "MaNV": 'nv06',
+                                "MaKH": GetMa
+                            }),
+                            contentType: 'application/json',
+                            dataType: 'json',
+                            error: function (res) {
+                                alert("Thêm mới hóa đơn bán " + MaHDB + " không thành công!");
+                                console.log(0);
+                            },
+                            success: function (res) {
+                                alert("Thêm mới hóa đơn bán " + MaHDB + "  thành công!");
+                                $.ajax({
+                                    url: url + "GioHang",
+                                    method: 'GET',
+                                    contentType: 'application/json',
+                                    dataType: 'json',
+                                    success: function (res) {
+                                        for (var i = 0; i < res.length; ++i) {
+                                            if (res[i].IsShopped == 0) {
+                                                $.ajax({
+                                                    url: url + "ChiTietHoaDonBan",
+                                                    method: 'POST',
+                                                    contentType: 'application/json',
+                                                    dataType: 'json',
+                                                    data: JSON.stringify({
+                                                        "MaHDB": MaHDB,
+                                                        "MaSP": res[i].MaSP,
+                                                        "SLBan": res[i].SoLuong,
+                                                        "ThanhTien": res[i].ThanhTien,
+                                                        "IsDeleted": 0
+                                                    }),
+                                                    success: function (res) {
+                                                        alert("Thêm mới chi tiết hóa đơn bán " + MaHDB + "  thành công!");
+                                                    },
+                                                    error: function (res) {
+                                                        alert("Thêm mới chi tiết hóa đơn bán " + MaHDB + " không thành công!");
+                                                    }
+                                                })
+                                                $.ajax({
+                                                    url: url + "giohang?id=" + res[i].ID + "&&xoa=1",
+                                                    method: 'PUT',
+                                                    contentType: 'application/json',
+                                                    dataType: 'json',
+                                                    error: function () {
+                                                        console.log(0);
+                                                    },
+                                                    success: function () {
+                                                        GetGioHang();
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    }
+                                })
+                            }
+                        });
+                    }
+                    
+                }
+            })
+
+            
+        }
+        function loadhome() {
+
+            window.location.href = "../../indexuser.html?Ten=" + GetTen + "&Ma=" + GetMa + "&Anh=" + GetAnh;
+        }
+        function loadprofile() {
+            window.location.href = "../../profile.html?Ten=" + GetTen + "&Ma=" + GetMa + "&Anh=" + GetAnh;
+        }
+        function loadcart() {
+
+            window.location.href = "../../cart.html?Ten=" + GetTen + "&Ma=" + GetMa + "&Anh=" + GetAnh;
+        }
+        function xoagiohang(ID) {
+            if (confirm("Bạn có chắc muốn xóa?")) {
+                $.ajax({
+                    url: url + "giohang?id=" + ID + "&&xoa=-1",
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    error: function () {
+                        alert("Xóa sản phẩm có mã sản phẩm: " + ID + "không thành công ! ");
+                    },
+                    success: function () {
+                        alert("Xóa sản phẩm có mã sản phẩm: " + ID + " thành công!");
+                        GetGioHang();
+                    }
+                })
+            }
+
+        }
+        function GetGioHang() {
+            $.ajax({
+                url: url + "GioHang",
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    let query = '';
+                    SoHdb = data.length+1;
+                    for (var i = 0; i < data.length; ++i) {
+                        if (data[i].IsShopped == 0 && data[i].MaKH==GetMa) {
+                            query = query + ' <div class="product-cart d-flex"> <div class="one-forth">  <div class="product-img" style="background-image: url(../assets/images/SanPham/' + data[i].Anh + ');"> ';
+                            query = query + ' </div> <div class="display-tc"> <h3>' + data[i].TenSP + '</h3> </div> </div> <div class="one-eight text-center">';
+                            query = query + ' <div class="display-tc"> <span class="price">' + data[i].GiaTien + '</span>  </div> </div>';
+                            query = query + ' <div class="one-eight text-center"> <div class="display-tc">';
+                            query = query + ' <input type="text" id="quantity" value="' + data[i].SoLuong + '" disabled>';
+                            query = query + ' </div> </div> <div class="one-eight text-center"> <div class="display-tc"> <span class="price">' + data[i].GiaTien * data[i].SoLuong + '</span> ';
+                            query = query + ' </div> </div>  <div class="one-eight text-center"> ';
+                            query = query + ' <div class="display-tc">   <button type="button" href="#" class="closed" onclick="xoagiohang(\'' + data[i].ID + '\')"></button> </div>  </div> </div> ';
+
+                        }
+                    }
+                    document.getElementById('AllSanPham').innerHTML = query;
+                }
+            })
+        };
+    </script>
+</body>
+</html>
+

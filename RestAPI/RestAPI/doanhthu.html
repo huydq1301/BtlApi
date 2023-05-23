@@ -1,0 +1,543 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purple Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End Plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- partial:../../partials/_navbar.html -->
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:../../partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item nav-profile">
+                        <a href="#" class="nav-link">
+                            <div class="nav-profile-image">
+                                <img id="profileAnh" src="../assets/images/AvatarNV/macdinh.png" alt="profile">
+                                <span class="login-status online"></span>
+                                <!--change to offline or busy as needed-->
+                            </div>
+                            <div class="nav-profile-text d-flex flex-column">
+                                <span id="profileTen" class="font-weight-bold mb-2">Tên</span>
+                                <span id="profileCV" class="text-secondary text-small">Chức Vụ</span>
+                            </div>
+                            <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-gradient-primary btn-fw" id="loadsanpham" onclick="LoadSanPham()">Sản Phẩm</button>
+
+                    </li>
+                    <div><br /></div>
+                    <li></li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-gradient-warning btn-fw" id="loadhoadon" onclick="LoadHoaDon()">Hóa Đơn Nhập</button>
+
+                    </li>
+                    <div><br /></div>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-gradient-info btn-fw" id="loadhoadonban" onclick="LoadHoaDonBan()">Hóa Đơn Bán</button>
+
+                    </li>
+                    <div><br /></div>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-gradient-success btn-fw" id="loadnhanvien" onclick="LoadNhanVien()">Nhân Viên</button>
+
+                    </li>
+                    <div><br /></div>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-gradient-danger btn-fw" id="loaddoanhthu" onclick="LoadDoanhThu()">Doanh Thu</button>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button class="btn btn-success btn-sm" id="hiendoanhthu" onclick="GetDTBan()">Hiện Doanh Thu Bán</button>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="my-select" class="form-control" style="background-color: gray">
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Tổng Tiền Bán</label>
+                            <input id="tongtien" type="text" style="color:red; font-weight:bold" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Doanh Thu Theo Năm</h4>
+                                    <canvas id="barChart" style="height:230px"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Cơ Cấu Doanh Thu Theo Sản Phẩm</h4>
+                                    <canvas id="doughnutChart" style="height:250px"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button class="btn btn-success btn-sm" id="hiendoanhthu-nhap" onclick="GetDTNhap()">Hiện Doanh Thu Nhập</button>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="my-select-nhap" class="form-control" style="background-color: gray">
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Tổng Tiền Nhập</label>
+                            <input id="tongtien-nhap" type="text" style="color:red; font-weight:bold" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Doanh Thu Theo Năm</h4>
+                                    <canvas id="barChart-nhap" style="height:230px"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Cơ Cấu Doanh Thu Theo Sản Phẩm</h4>
+                                    <canvas id="doughnutChart-nhap" style="height:250px"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script src="../../assets/vendors/chart.js/Chart.min.js"></script>
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="../../assets/js/off-canvas.js"></script>
+        <script src="../../assets/js/hoverable-collapse.js"></script>
+        <script src="../../assets/js/misc.js"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page -->
+        <!-- End custom js for this page -->
+        <script type="text/javascript">
+            var DoanhThu = [];
+            var DtSP = [];
+            var TenSP = [];
+            var TongTien = 0;
+            let nam = document.getElementById("my-select");
+            var DoanhThu_Nhap= [];
+            var DtSP_Nhap = [];
+            var TenSP_Nhap = [];
+            var TongTien_Nhap = 0;
+            let nam_nhap = document.getElementById("my-select-nhap");
+            let searchParams = new URLSearchParams(window.location.search);
+            let GetTen = searchParams.get("Ten");
+            let GetChucVu = searchParams.get("ChucVu");
+            let GetAnh = searchParams.get("Anh");
+            $(document).ready(function () {
+                
+            });
+            function LoadSanPham() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../index.html" + queryString;
+            }
+            function LoadHoaDon() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../hoadon.html" + queryString;
+            }
+            function LoadHoaDonBan() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../hoadonban.html" + queryString;
+            }
+            function LoadNhanVien() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../nhanvien.html" + queryString;
+            }
+            function LoadUser() {
+                document.getElementById("profileTen").innerHTML = GetTen;
+                document.getElementById("profileCV").innerHTML = GetChucVu;
+                document.getElementById("profileAnh").src = "../assets/images/AvatarNV/" + GetAnh;
+
+            }
+            function LoadDoanhThu() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../doanhthu.html" + queryString;
+            }
+            $(document).ready(function () {
+                if (GetTen == "" || GetTen == null) {
+                    alert("Vui lòng đăng nhập");
+                    window.location.href = "../../login.html";
+                    return;
+                }
+                LoadUser();
+                let options = '';
+                document.getElementById("tongtien").disabled = true;
+                document.getElementById("tongtien-nhap").disabled = true;
+                for (var i = 1990; i < 2024; ++i) {
+                    options = options + '<option value="' + i + '">' + i + '</option>';
+                }
+                $('#my-select').html(options).prepend('<option value="" disabled selected hidden>--Chọn Năm--</option>');
+                $('#my-select-nhap').html(options).prepend('<option value="" disabled selected hidden>--Chọn Năm--</option>');
+                // Gán giá trị hiện tại của select cho biến 'nam'
+                $(nam).on('change', function () {
+                    let selectedYear = $(this).val();
+                    $.ajax({
+                        url: "https://localhost:44344/api/doanhthu?nam=" + selectedYear,
+                        method: 'GET',
+                        contentType: 'application/json',
+                        dataType: 'json'
+                    }).then(function (data) {
+                        DoanhThu[0] = data[0].Thang1;
+                        DoanhThu[1] = data[0].Thang2;
+                        DoanhThu[2] = data[0].Thang3;
+                        DoanhThu[3] = data[0].Thang4;
+                        DoanhThu[4] = data[0].Thang5;
+                        DoanhThu[5] = data[0].Thang6;
+                        DoanhThu[6] = data[0].Thang7;
+                        DoanhThu[7] = data[0].Thang8;
+                        DoanhThu[8] = data[0].Thang9;
+                        DoanhThu[9] = data[0].Thang10;
+                        DoanhThu[10] = data[0].Thang11;
+                        DoanhThu[11] = data[0].Thang12;
+                    });
+
+                    $.ajax({
+                        url: "https://localhost:44344/api/doanhthu?namtheosp=" + selectedYear,
+                        method: 'GET',
+                        contentType: 'application/json',
+                        dataType: 'json'
+                    }).then(function (data) {
+                        for (var i = 0; i < data.length; ++i) {
+                            DtSP[i] = data[i].DTBan;
+                            TenSP[i] = data[i].TenSP;
+                            TongTien += DtSP[i];
+                        }
+                    });
+                });
+                $(nam_nhap).on('change', function () {
+                    let selectedYear_Nhap = $(this).val();
+                    $.ajax({
+                        url: "https://localhost:44344/api/doanhthu?namnhap=" + selectedYear_Nhap,
+                        method: 'GET',
+                        contentType: 'application/json',
+                        dataType: 'json'
+                    }).then(function (data) {
+                        DoanhThu_Nhap[0] = data[0].Thang1;
+                        DoanhThu_Nhap[1] = data[0].Thang2;
+                        DoanhThu_Nhap[2] = data[0].Thang3;
+                        DoanhThu_Nhap[3] = data[0].Thang4;
+                        DoanhThu_Nhap[4] = data[0].Thang5;
+                        DoanhThu_Nhap[5] = data[0].Thang6;
+                        DoanhThu_Nhap[6] = data[0].Thang7;
+                        DoanhThu_Nhap[7] = data[0].Thang8;
+                        DoanhThu_Nhap[8] = data[0].Thang9;
+                        DoanhThu_Nhap[9] = data[0].Thang10;
+                        DoanhThu_Nhap[10] = data[0].Thang11;
+                        DoanhThu_Nhap[11] = data[0].Thang12;
+                    });
+                    $.ajax({
+                        url: "https://localhost:44344/api/doanhthu?namnhaptheosp=" + selectedYear_Nhap,
+                        method: 'GET',
+                        contentType: 'application/json',
+                        dataType: 'json'
+                    }).then(function (data) {
+                        for (var i = 0; i < data.length; ++i) {
+                            DtSP_Nhap[i] = data[i].DTNhap;
+                            TenSP_Nhap[i] = data[i].TenSP;
+                            TongTien_Nhap += DtSP_Nhap[i];
+                        }
+                    });
+                });
+            });
+            function GetDTBan() {
+                if (TongTien == 0) {
+                    alert("Không có doanh thu của năm bạn đã chọn. Vui lòng chọn năm khác");
+                    return;
+                }
+                document.getElementById("tongtien").value = TongTien; 
+                TongTien = 0;
+                    'use strict';
+                    var data = {
+                        labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+                        datasets: [{
+                            data: DoanhThu,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1,
+                            fill: false
+                        }]
+                    };
+                    var options = {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        elements: {
+                            point: {
+                                radius: 0
+                            }
+                        }
+
+                    };
+                    var doughnutPieData = {
+                        datasets: [{
+                            data: DtSP,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)',
+                                'rgba(153, 102, 255, 0.5)',
+                                'rgba(255, 159, 64, 0.5)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                        }],
+
+                        // These labels appear in the legend and in the tooltips when hovering different arcs
+                        labels: TenSP
+                    };
+                    var doughnutPieOptions = {
+                        responsive: true,
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true
+                        }
+                    };
+
+
+                    // Get context with jQuery - using jQuery's .get() method.
+                    if ($("#barChart").length) {
+                        var barChartCanvas = $("#barChart").get(0).getContext("2d");
+                        // This will get the first returned node in the jQuery collection.
+                        var barChart = new Chart(barChartCanvas, {
+                            type: 'bar',
+                            data: data,
+                            options: options
+                        });
+                    }
+
+
+
+                    if ($("#doughnutChart").length) {
+                        var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+                        var doughnutChart = new Chart(doughnutChartCanvas, {
+                            type: 'doughnut',
+                            data: doughnutPieData,
+                            options: doughnutPieOptions
+                        });
+                    }
+
+
+            };
+            function GetDTNhap() {
+                if (TongTien_Nhap == 0) {
+                    alert("Không có doanh thu của năm bạn đã chọn. Vui lòng chọn năm khác");
+                    return;
+                }
+                document.getElementById("tongtien-nhap").value = TongTien_Nhap;
+                TongTien_Nhap = 0;
+                'use strict';
+                var data = {
+                    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+                    datasets: [{
+                        data: DoanhThu_Nhap,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                };
+                var options = {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 0
+                        }
+                    }
+
+                };
+                var doughnutPieData = {
+                    datasets: [{
+                        data: DtSP_Nhap,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                    }],
+
+                    // These labels appear in the legend and in the tooltips when hovering different arcs
+                    labels: TenSP_Nhap
+                };
+                var doughnutPieOptions = {
+                    responsive: true,
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                };
+
+
+                // Get context with jQuery - using jQuery's .get() method.
+                if ($("#barChart-nhap").length) {
+                    var barChartCanvas = $("#barChart-nhap").get(0).getContext("2d");
+                    // This will get the first returned node in the jQuery collection.
+                    var barChart = new Chart(barChartCanvas, {
+                        type: 'bar',
+                        data: data,
+                        options: options
+                    });
+                }
+
+
+
+                if ($("#doughnutChart-nhap").length) {
+                    var doughnutChartCanvas = $("#doughnutChart-nhap").get(0).getContext("2d");
+                    var doughnutChart = new Chart(doughnutChartCanvas, {
+                        type: 'doughnut',
+                        data: doughnutPieData,
+                        options: doughnutPieOptions
+                    });
+                }
+
+
+            };
+
+        </script>
+</body>
+</html>

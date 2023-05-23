@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 19.375, 25.625" name="DbQuanLyBanQuanAo">
+  <DataContextMoniker Name="/DbQuanLyBanQuanAoDataContext" />
+  <nestedChildShapes>
+    <classShape Id="39f98a37-f7df-420e-bd44-f22867189c1d" absoluteBounds="9.375, 12.875, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblAccount" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3e3e7e65-36a8-4b23-95ab-b4806ceb3318" absoluteBounds="9.39, 13.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d03bb459-1799-4ee1-a2d1-2e18572ae501" absoluteBounds="9.125, 15.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblChatLieu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ab3743f3-67fd-4146-b9c1-a786740a1944" absoluteBounds="9.14, 15.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9667745b-a385-4677-b934-0c68912e5813" absoluteBounds="13.625, 15.125, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblChiTietHDB" />
+      <nestedChildShapes>
+        <elementListCompartment Id="329b0dad-82cd-4cc1-ae6c-aeda9e8a3bd0" absoluteBounds="13.64, 15.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fab70b37-3563-4504-a035-1a5db37e3e08" absoluteBounds="14.75, 13.125, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblChiTietHDN" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6cfcfe14-ca5f-4e13-8a83-f6aee79d9c42" absoluteBounds="14.765, 13.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="668cfcca-2634-4369-b77d-a58cd2426db1" absoluteBounds="8.625, 17, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblHoaDonBan" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d2a49382-87dd-4d11-b2d7-ca07582a750b" absoluteBounds="8.64, 17.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10.625 : 17.8854484049479); (11.5 : 17.8854484049479); (11.5 : 17); (12.4166666666667 : 17 : JumpStart); (12.5833333333333 : 17 : JumpEnd); (13.375 : 17); (13.375 : 17.1458968098958); (14.625 : 17.1458968098958); (14.625 : 16.8958968098958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblHoaDonBan/tblHoaDonBan_tblChiTietHDB" />
+      <nodes>
+        <classShapeMoniker Id="668cfcca-2634-4369-b77d-a58cd2426db1" />
+        <classShapeMoniker Id="9667745b-a385-4677-b934-0c68912e5813" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="3a146b48-e83f-4567-b64e-8557edcadd6d" absoluteBounds="11.75, 17.25, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblHoaDonNhap" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7eb670db-4a48-4952-8174-8f67be58c830" absoluteBounds="11.765, 17.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(13.75 : 18.1354484049479); (13.9166666666667 : 18.1354484049479 : JumpStart); (14.0833333333333 : 18.1354484049479 : JumpEnd); (14.1510441666667 : 18.1354484049479 : JumpStart); (14.3177108333333 : 18.1354484049479 : JumpEnd); (14.375 : 18.1354484049479); (14.375 : 17.2708968098958); (15.875 : 17.2708968098958); (15.875 : 15.2708968098958); (15.9166666666667 : 15.2708968098958 : JumpStart); (16.0833333333333 : 15.2708968098958 : JumpEnd); (16.1875005 : 15.2708968098958); (16.1875005 : 14.8958968098958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblHoaDonNhap/tblHoaDonNhap_tblChiTietHDN" />
+      <nodes>
+        <classShapeMoniker Id="3a146b48-e83f-4567-b64e-8557edcadd6d" />
+        <classShapeMoniker Id="fab70b37-3563-4504-a035-1a5db37e3e08" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e568ed9e-6200-45df-af36-0b02c3ba21ab" absoluteBounds="14.875, 17.625, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblKhachHang" />
+      <nestedChildShapes>
+        <elementListCompartment Id="54cc6cfb-0a84-4ec0-97e1-6ea3238687f3" absoluteBounds="14.89, 18.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(16.84375 : 17.625); (16.84375 : 12.96875); (11.375 : 12.96875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblKhachHang/tblKhachHang_tblAccount" />
+      <nodes>
+        <classShapeMoniker Id="e568ed9e-6200-45df-af36-0b02c3ba21ab" />
+        <classShapeMoniker Id="39f98a37-f7df-420e-bd44-f22867189c1d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14.875 : 19.1979484049479); (14.3177108333333 : 19.1979484049479 : JumpStart); (14.1510441666667 : 19.1979484049479 : JumpEnd); (14.0833333333333 : 19.1979484049479 : JumpStart); (13.9166666666667 : 19.1979484049479 : JumpEnd); (12.8333333333333 : 19.1979484049479 : JumpStart); (12.6666666666667 : 19.1979484049479 : JumpEnd); (10.53125 : 19.1979484049479); (10.53125 : 18.7708968098958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblKhachHang/tblKhachHang_tblHoaDonBan" />
+      <nodes>
+        <classShapeMoniker Id="e568ed9e-6200-45df-af36-0b02c3ba21ab" />
+        <classShapeMoniker Id="668cfcca-2634-4369-b77d-a58cd2426db1" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="c0bca088-67a9-4a9d-a86e-2ddd4c43f176" absoluteBounds="17.125, 16.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblMauSac" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2138584f-23b2-4218-80a8-fb29cb222c83" absoluteBounds="17.14, 16.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="da76b634-c699-4fba-b8bb-4fca4c24ade4" absoluteBounds="11.75, 15.25, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblNhaCungCap" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d52ac33c-0889-494f-b117-6e40f3cf520e" absoluteBounds="11.765, 15.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12.5 : 16.6362939453125); (12.5 : 17.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblNhaCungCap/tblNhaCungCap_tblHoaDonNhap" />
+      <nodes>
+        <classShapeMoniker Id="da76b634-c699-4fba-b8bb-4fca4c24ade4" />
+        <classShapeMoniker Id="3a146b48-e83f-4567-b64e-8557edcadd6d" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="4e34118f-82a7-4994-91c2-a6db244f8222" absoluteBounds="8.375, 19.375, 2, 2.5401025390625">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblNV" />
+      <nestedChildShapes>
+        <elementListCompartment Id="aa97675b-cd30-4b57-9934-f787e37d7e2f" absoluteBounds="8.39, 19.835, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.5 : 19.375); (9.5 : 18.7708968098958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblNV/tblNV_tblHoaDonBan" />
+      <nodes>
+        <classShapeMoniker Id="4e34118f-82a7-4994-91c2-a6db244f8222" />
+        <classShapeMoniker Id="668cfcca-2634-4369-b77d-a58cd2426db1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.375 : 20.6450512695313); (12.75 : 20.6450512695313); (12.75 : 19.0208968098958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblNV/tblNV_tblHoaDonNhap" />
+      <nodes>
+        <classShapeMoniker Id="4e34118f-82a7-4994-91c2-a6db244f8222" />
+        <classShapeMoniker Id="3a146b48-e83f-4567-b64e-8557edcadd6d" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="002a681e-8f5d-4220-8195-f977ee04fada" absoluteBounds="13.25, 22.25, 2, 3.1170068359375">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblSanPham" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c24120d0-c7eb-4f64-820d-9a3109ae86ef" absoluteBounds="13.265, 22.71, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(14.03125 : 22.25); (14.03125 : 16.8958968098958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblSanPham/tblSanPham_tblChiTietHDB" />
+      <nodes>
+        <classShapeMoniker Id="002a681e-8f5d-4220-8195-f977ee04fada" />
+        <classShapeMoniker Id="9667745b-a385-4677-b934-0c68912e5813" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14.2343775 : 22.25); (14.2343775 : 17.0208968098958); (14.5416666666667 : 17.0208968098958 : JumpStart); (14.7083333333333 : 17.0208968098958 : JumpEnd); (16 : 17.0208968098958); (16 : 15.1458968098958); (17.25 : 15.1458968098958); (17.25 : 14.0104484049479); (16.75 : 14.0104484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblSanPham/tblSanPham_tblChiTietHDN" />
+      <nodes>
+        <classShapeMoniker Id="002a681e-8f5d-4220-8195-f977ee04fada" />
+        <classShapeMoniker Id="fab70b37-3563-4504-a035-1a5db37e3e08" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.03125 : 16.5112939453125); (11.03125 : 25.095400390625); (13.25 : 25.095400390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblChatLieu/tblChatLieu_tblSanPham" />
+      <nodes>
+        <classShapeMoniker Id="d03bb459-1799-4ee1-a2d1-2e18572ae501" />
+        <classShapeMoniker Id="002a681e-8f5d-4220-8195-f977ee04fada" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(18.125 : 17.8862939453125); (18.125 : 23.8085034179688); (15.25 : 23.8085034179688)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblMauSac/tblMauSac_tblSanPham" />
+      <nodes>
+        <classShapeMoniker Id="c0bca088-67a9-4a9d-a86e-2ddd4c43f176" />
+        <classShapeMoniker Id="002a681e-8f5d-4220-8195-f977ee04fada" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(12.9687525 : 16.6362939453125); (12.9687525 : 16.875); (13.375 : 16.875); (13.375 : 17.0833968098958); (14 : 17.0833968098958); (14 : 22); (13 : 22); (13 : 22.9979997089844); (13.25 : 22.9979997089844)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblNhaCungCap/tblNhaCungCap_tblSanPham" />
+      <nodes>
+        <classShapeMoniker Id="da76b634-c699-4fba-b8bb-4fca4c24ade4" />
+        <classShapeMoniker Id="002a681e-8f5d-4220-8195-f977ee04fada" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="26a80eea-40c5-466b-be59-21dd6bdcb6d5" absoluteBounds="8.75, 23.375, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblSize" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0a0b2336-796f-426e-a1e1-3500165e7bd2" absoluteBounds="8.765, 23.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10.75 : 24.6723453776042); (13.25 : 24.6723453776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblSize/tblSize_tblSanPham" />
+      <nodes>
+        <classShapeMoniker Id="26a80eea-40c5-466b-be59-21dd6bdcb6d5" />
+        <classShapeMoniker Id="002a681e-8f5d-4220-8195-f977ee04fada" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="833cb4b0-eec8-4972-aa8a-b7c736a3b0f1" absoluteBounds="8.875, 22.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/tblUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="116cca70-8359-42b7-a371-4102d17cbba7" absoluteBounds="8.89, 23.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.625 : 21.9151025390625); (9.625 : 22.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DbQuanLyBanQuanAoDataContext/tblNV/tblNV_tblUser" />
+      <nodes>
+        <classShapeMoniker Id="4e34118f-82a7-4994-91c2-a6db244f8222" />
+        <classShapeMoniker Id="833cb4b0-eec8-4972-aa8a-b7c736a3b0f1" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="45a60b36-c1d8-435e-a27c-1693a65b468b" absoluteBounds="9.5, 7.75, 2, 2.5401025390625">
+      <DataClassMoniker Name="/DbQuanLyBanQuanAoDataContext/GioHang" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9e698770-00c4-477c-8d16-ef50c67e6b63" absoluteBounds="9.515, 8.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="API_QuanLyBanQuanAo" Class="DbQuanLyBanQuanAoDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.tblAccount" Member="tblAccounts">
+    <Type Name="tblAccount">
+      <Column Name="MaKH" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblKhachHang_tblAccount" Member="tblKhachHang" ThisKey="MaKH" OtherKey="MaKH" Type="tblKhachHang" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblChatLieu" Member="tblChatLieus">
+    <Type Name="tblChatLieu">
+      <Column Name="MaChatLieu" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenChatLieu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblChatLieu_tblSanPham" Member="tblSanPhams" ThisKey="MaChatLieu" OtherKey="MaChatLieu" Type="tblSanPham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblChiTietHDB" Member="tblChiTietHDBs">
+    <Type Name="tblChiTietHDB">
+      <Column Name="MaHDB" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaSP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SLBan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ThanhTien" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblHoaDonBan_tblChiTietHDB" Member="tblHoaDonBan" ThisKey="MaHDB" OtherKey="MaHDB" Type="tblHoaDonBan" IsForeignKey="true" />
+      <Association Name="tblSanPham_tblChiTietHDB" Member="tblSanPham" ThisKey="MaSP" OtherKey="MaSP" Type="tblSanPham" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblChiTietHDN" Member="tblChiTietHDNs">
+    <Type Name="tblChiTietHDN">
+      <Column Name="MaHDN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MaSP" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SLNhap" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ThanhTien" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblHoaDonNhap_tblChiTietHDN" Member="tblHoaDonNhap" ThisKey="MaHDN" OtherKey="MaHDN" Type="tblHoaDonNhap" IsForeignKey="true" />
+      <Association Name="tblSanPham_tblChiTietHDN" Member="tblSanPham" ThisKey="MaSP" OtherKey="MaSP" Type="tblSanPham" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblHoaDonBan" Member="tblHoaDonBans">
+    <Type Name="tblHoaDonBan">
+      <Column Name="MaHDB" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaNV" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaKH" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgayBan" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblHoaDonBan_tblChiTietHDB" Member="tblChiTietHDBs" ThisKey="MaHDB" OtherKey="MaHDB" Type="tblChiTietHDB" />
+      <Association Name="tblKhachHang_tblHoaDonBan" Member="tblKhachHang" ThisKey="MaKH" OtherKey="MaKH" Type="tblKhachHang" IsForeignKey="true" />
+      <Association Name="tblNV_tblHoaDonBan" Member="tblNV" ThisKey="MaNV" OtherKey="MaNV" Type="tblNV" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblHoaDonNhap" Member="tblHoaDonNhaps">
+    <Type Name="tblHoaDonNhap">
+      <Column Name="MaHDN" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaNV" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgayNhap" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MaNCC" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblHoaDonNhap_tblChiTietHDN" Member="tblChiTietHDNs" ThisKey="MaHDN" OtherKey="MaHDN" Type="tblChiTietHDN" />
+      <Association Name="tblNhaCungCap_tblHoaDonNhap" Member="tblNhaCungCap" ThisKey="MaNCC" OtherKey="MaNCC" Type="tblNhaCungCap" IsForeignKey="true" />
+      <Association Name="tblNV_tblHoaDonNhap" Member="tblNV" ThisKey="MaNV" OtherKey="MaNV" Type="tblNV" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblKhachHang" Member="tblKhachHangs">
+    <Type Name="tblKhachHang">
+      <Column Name="MaKH" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKH" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DienThoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Anh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblKhachHang_tblAccount" Member="tblAccount" ThisKey="MaKH" OtherKey="MaKH" Type="tblAccount" Cardinality="One" />
+      <Association Name="tblKhachHang_tblHoaDonBan" Member="tblHoaDonBans" ThisKey="MaKH" OtherKey="MaKH" Type="tblHoaDonBan" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblMauSac" Member="tblMauSacs">
+    <Type Name="tblMauSac">
+      <Column Name="MaMauSac" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenMau" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblMauSac_tblSanPham" Member="tblSanPhams" ThisKey="MaMauSac" OtherKey="MaMauSac" Type="tblSanPham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblNhaCungCap" Member="tblNhaCungCaps">
+    <Type Name="tblNhaCungCap">
+      <Column Name="MaNCC" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNCC" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblNhaCungCap_tblHoaDonNhap" Member="tblHoaDonNhaps" ThisKey="MaNCC" OtherKey="MaNCC" Type="tblHoaDonNhap" />
+      <Association Name="tblNhaCungCap_tblSanPham" Member="tblSanPhams" ThisKey="MaNCC" OtherKey="MaNCC" Type="tblSanPham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblNV" Member="tblNVs">
+    <Type Name="tblNV">
+      <Column Name="MaNV" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNV" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SoDienThoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Anh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ChucVu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblNV_tblHoaDonBan" Member="tblHoaDonBans" ThisKey="MaNV" OtherKey="MaNV" Type="tblHoaDonBan" />
+      <Association Name="tblNV_tblHoaDonNhap" Member="tblHoaDonNhaps" ThisKey="MaNV" OtherKey="MaNV" Type="tblHoaDonNhap" />
+      <Association Name="tblNV_tblUser" Member="tblUser" ThisKey="MaNV" OtherKey="MaNV" Type="tblUser" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblSanPham" Member="tblSanPhams">
+    <Type Name="tblSanPham">
+      <Column Name="MaSP" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenSP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaChatLieu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaMauSac" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaSize" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DonGiaNhap" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DonGiaBan" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Anh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaNCC" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblSanPham_tblChiTietHDB" Member="tblChiTietHDBs" ThisKey="MaSP" OtherKey="MaSP" Type="tblChiTietHDB" />
+      <Association Name="tblSanPham_tblChiTietHDN" Member="tblChiTietHDNs" ThisKey="MaSP" OtherKey="MaSP" Type="tblChiTietHDN" />
+      <Association Name="tblChatLieu_tblSanPham" Member="tblChatLieu" ThisKey="MaChatLieu" OtherKey="MaChatLieu" Type="tblChatLieu" IsForeignKey="true" />
+      <Association Name="tblMauSac_tblSanPham" Member="tblMauSac" ThisKey="MaMauSac" OtherKey="MaMauSac" Type="tblMauSac" IsForeignKey="true" />
+      <Association Name="tblNhaCungCap_tblSanPham" Member="tblNhaCungCap" ThisKey="MaNCC" OtherKey="MaNCC" Type="tblNhaCungCap" IsForeignKey="true" />
+      <Association Name="tblSize_tblSanPham" Member="tblSize" ThisKey="MaSize" OtherKey="MaSize" Type="tblSize" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblSize" Member="tblSizes">
+    <Type Name="tblSize">
+      <Column Name="MaSize" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenSize" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblSize_tblSanPham" Member="tblSanPhams" ThisKey="MaSize" OtherKey="MaSize" Type="tblSanPham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblUser" Member="tblUsers">
+    <Type Name="tblUser">
+      <Column Name="MaNV" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblNV_tblUser" Member="tblNV" ThisKey="MaNV" OtherKey="MaNV" Type="tblNV" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GioHang" Member="GioHangs">
+    <Type Name="GioHang">
+      <Column Name="ID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaSP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TenSP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GiaTien" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ThanhTien" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="IsShopped" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Anh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaKH" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.SPBan" Method="SPBan" IsComposable="true">
+    <Parameter Name="Nam" Parameter="nam" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TenSP" Parameter="tenSP" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="SPBanResult">
+      <Column Name="TenSP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DTBan" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SPBanBDTron" Method="SPBanBDTron" IsComposable="true">
+    <Parameter Name="Nam" Parameter="nam" Type="System.Int32" DbType="Int" />
+    <ElementType Name="SPBanBDTronResult">
+      <Column Name="TenSP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DTBan" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SPNhap" Method="SPNhap" IsComposable="true">
+    <Parameter Name="Nam" Parameter="nam" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TenSP" Parameter="tenSP" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="SPNhapResult">
+      <Column Name="TenSP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DTNhap" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SPNhapBDTron" Method="SPNhapBDTron" IsComposable="true">
+    <Parameter Name="Nam" Parameter="nam" Type="System.Int32" DbType="Int" />
+    <ElementType Name="SPNhapBDTronResult">
+      <Column Name="TenSP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DTNhap" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TienBanNam" Method="TienBanNam" IsComposable="true">
+    <Parameter Name="Nam" Parameter="nam" Type="System.Int32" DbType="Int" />
+    <ElementType Name="TienBanNamResult">
+      <Column Name="Thang1" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang2" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang3" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang4" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang5" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang6" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang7" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang8" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang9" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang10" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang11" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang12" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TienNhapNam" Method="TienNhapNam" IsComposable="true">
+    <Parameter Name="Nam" Parameter="nam" Type="System.Int32" DbType="Int" />
+    <ElementType Name="TienNhapNamResult">
+      <Column Name="Thang1" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang2" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang3" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang4" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang5" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang6" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang7" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang8" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang9" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang10" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang11" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Thang12" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

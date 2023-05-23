@@ -1,0 +1,204 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="AssetsUser/css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="AssetsUser/css/icomoon.css">
+    <!-- Ion Icon Fonts-->
+    <link rel="stylesheet" href="AssetsUser/css/ionicons.min.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="AssetsUser/css/bootstrap.min.css">
+
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="AssetsUser/css/magnific-popup.css">
+
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="AssetsUser/css/flexslider.css">
+    <script type="text/javascript" src="Scripts/jquery-3.4.1.js"></script>
+
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="AssetsUser/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="AssetsUser/css/owl.theme.default.min.css">
+
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="AssetsUser/css/bootstrap-datepicker.css">
+    <!-- Flaticons  -->
+    <link rel="stylesheet" href="AssetsUser/fonts/flaticon/font/flaticon.css">
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="AssetsUser/css/style.css">
+
+</head>
+<body>
+
+    <div class="colorlib-loader"></div>
+
+    <div id="page">
+        <nav class="colorlib-nav" role="navigation">
+            <div class="top-menu">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 text-left menu-1">
+                            <ul>
+                                <li><button type="button" onclick="loadhome()">Home</button></li>
+                                <li class="cart"><button type="button" onclick="loadcart()"><i class="icon-shopping-cart"></i> Cart [0]</button></li>
+                                <li><button type="button" onclick="loadprofile()">Profile</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row row-pb-lg">
+                <div class="col-md-12">
+                    <div class="product-name d-flex">
+                        <div class="one-forth text-left px-4">
+                            <span>History</span>
+                        </div>
+                    </div>
+
+                    <div class="product-name d-flex">
+                        <div class="one-forth text-left px-4">
+                            <span>Product Details</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Price</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Quantity</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Total</span>
+                        </div>
+                        <div class="one-eight text-center px-4">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" id="AllSanPham">
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+    </div>
+
+    <!-- jQuery -->
+    <script src="AssetsUser/js/jquery.min.js"></script>
+    <!-- popper -->
+    <script src="AssetsUser/js/popper.min.js"></script>
+    <!-- bootstrap 4.1 -->
+    <script src="AssetsUser/js/bootstrap.min.js"></script>
+    <!-- jQuery easing -->
+    <script src="AssetsUser/js/jquery.easing.1.3.js"></script>
+    <!-- Waypoints -->
+    <script src="AssetsUser/js/jquery.waypoints.min.js"></script>
+    <!-- Flexslider -->
+    <script src="AssetsUser/js/jquery.flexslider-min.js"></script>
+    <!-- Owl carousel -->
+    <script src="AssetsUser/js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="AssetsUser/js/jquery.magnific-popup.min.js"></script>
+    <script src="AssetsUser/js/magnific-popup-options.js"></script>
+    <!-- Date Picker -->
+    <script src="AssetsUser/js/bootstrap-datepicker.js"></script>
+    <!-- Stellar Parallax -->
+    <script src="AssetsUser/js/jquery.stellar.min.js"></script>
+    <!-- Main -->
+    <script src="AssetsUser/js/main.js"></script>
+    <script type="text/javascript">
+        var k = 0;
+        let url = 'https://localhost:44344/api/';
+        let searchParams = new URLSearchParams(window.location.search);
+        let SoLuong = 0;
+        let GetTen = searchParams.get("Ten");
+        let GetAnh = searchParams.get("Anh");
+        let GetMa = searchParams.get("Ma");
+        $(document).ready(function () {
+            if (GetTen == "" || GetTen == null) {
+                alert("Vui lòng đăng nhập");
+                window.location.href = "../../loginkh.html";
+                return;
+            }
+            GetGioHang();
+        });
+        function loadhome() {
+
+            window.location.href = "../../indexuser.html?Ten=" + GetTen + "&Ma=" + GetMa + "&Anh=" + GetAnh;
+        }
+        function loadcart() {
+
+            window.location.href = "../../cart.html?Ten=" + GetTen + "&Ma=" + GetMa + "&Anh=" + GetAnh;
+        }
+        function loadprofile() {
+            window.location.href = "../../profile.html?Ten=" + GetTen + "&Ma=" + GetMa + "&Anh=" + GetAnh;
+        }
+        function GetGioHang() {
+            $.ajax({
+                url: url + "GioHang",
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    let query = '';
+                    for (var i = 0; i < data.length; ++i) {
+                        if (data[i].IsShopped == 1 && data[i].MaKH == GetMa) {
+                            query = query + ' <div class="product-cart d-flex"> <div class="one-forth">  <div class="product-img" style="background-image: url(../assets/images/SanPham/' + data[i].Anh + ');"> ';
+                            query = query + ' </div> <div class="display-tc"> <h3>' + data[i].TenSP + '</h3> </div> </div> <div class="one-eight text-center">';
+                            query = query + ' <div class="display-tc"> <span class="price">' + data[i].GiaTien + '</span>  </div> </div>';
+                            query = query + ' <div class="one-eight text-center"> <div class="display-tc">';
+                            query = query + ' <input type="text" id="quantity" value="' + data[i].SoLuong + '" disabled>';
+                            query = query + ' </div> </div> <div class="one-eight text-center"> <div class="display-tc"> <span class="price">' + data[i].GiaTien * data[i].SoLuong + '</span> ';
+                            query = query + ' </div> </div>  <div class="one-eight text-center"> ';
+                            query = query + ' <div class="display-tc">    </div>  </div> </div> ';
+
+                        }
+                    }
+                    document.getElementById('AllSanPham').innerHTML = query;
+                }
+            })
+
+            //$.ajax({
+            //    url: url + "GioHang",
+            //    method: 'GET',
+            //    contentType: 'application/json',
+            //    dataType: 'json',
+            //    success: function (data) {
+            //        let query = '';
+            //        SoHdb = data.length+1;
+            //        for (var i = 0; i < data.length; ++i) {
+            //            if (data[i].IsShopped == 1) {
+            //                query = query + ' <div class="product-cart d-flex"> <div class="one-forth">  <div class="product-img" style="background-image: url(../assets/images/SanPham/' + data[i].Anh + ');"> ';
+            //                query = query + ' </div> <div class="display-tc"> <h3>' + data[i].TenSP + '</h3> </div> </div> <div class="one-eight text-center">';
+            //                query = query + ' <div class="display-tc"> <span class="price">' + data[i].GiaTien + '</span>  </div> </div>';
+            //                query = query + ' <div class="one-eight text-center"> <div class="display-tc">';
+            //                query = query + ' <input type="text" id="quantity" value="' + data[i].SoLuong + '" disabled>';
+            //                query = query + ' </div> </div> <div class="one-eight text-center"> <div class="display-tc"> <span class="price">' + data[i].GiaTien * data[i].SoLuong + '</span> ';
+            //                query = query + ' </div> </div>  <div class="one-eight text-center"> ';
+            //                query = query + ' <div class="display-tc">    </div>  </div> </div> ';
+
+            //            }
+            //        }
+            //        document.getElementById('AllSanPham').innerHTML = query;
+            //    }
+            //})
+        };
+    </script>
+</body>
+</html>
+

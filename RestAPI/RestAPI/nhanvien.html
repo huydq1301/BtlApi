@@ -1,0 +1,893 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+    <script type="text/javascript" src="Scripts/jquery-3.4.1.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- End layout styles -->
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item nav-profile">
+                    <a href="#" class="nav-link">
+                        <div class="nav-profile-image">
+                            <img id="profileAnh" src="../assets/images/AvatarNV/macdinh.png" alt="profile">
+                            <span class="login-status online"></span>
+                            <!--change to offline or busy as needed-->
+                        </div>
+                        <div class="nav-profile-text d-flex flex-column">
+                            <span id="profileTen" class="font-weight-bold mb-2">Tên</span>
+                            <span id="profileCV" class="text-secondary text-small">Chức Vụ</span>
+                        </div>
+                        <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-primary btn-fw" id="loadsanpham" onclick="LoadSanPham()">Sản Phẩm</button>
+
+                </li>
+                <div><br /></div>
+                <li></li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-warning btn-fw" id="loadhoadon" onclick="LoadHoaDon()">Hóa Đơn Nhập</button>
+
+                </li>
+                <div><br /></div>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-info btn-fw" id="loadhoadonban" onclick="LoadHoaDonBan()">Hóa Đơn Bán</button>
+
+                </li>
+                <div><br /></div>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-success btn-fw" id="loadnhanvien" onclick="LoadNhanVien()">Nhân Viên</button>
+
+                </li>
+                <div><br /></div>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-danger btn-fw" id="loaddoanhthu" onclick="LoadDoanhThu()">Doanh Thu</button>
+                </li>
+            </ul>
+</nav>
+        <!-- partial -->
+        <div class="content-wrapper">
+            <div>
+                <div class="row" id="form-table">
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-danger" id="thungrac" onclick="GetThungRac()">Thùng Rác</button>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-danger" id="quaylai" onclick="QuayLai()">Quay Lại</button>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-info" id="reset" onclick="Reset()">Reset</button>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-warning" id="btntimkiem" onclick="search()">Tìm Kiếm</button>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="my-select" class="form-control" style="background-color: gray">
+                            <option value="MaNV">Mã Nhân Viên</option>
+                            <option value="TenNV">Tên Nhân Viên</option>
+                        </select>
+                        <input id="timkiem" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-12 stretch-card">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Mã Nhân Viên</th>
+                                        <th>Tên Nhân Viên</th>
+                                        <th>Ngày Sinh</th>
+                                        <th>Giới Tính</th>
+                                        <th>Địa Chỉ</th>
+                                        <th>Số Điện Thoại</th>
+                                        <th>Ảnh</th>
+                                        <th>Chức Vụ</th>
+                                        <th colspan="2">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="AllNV"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- phân trang vào đây-->
+            <div class="row">
+                <div class="col-md-2">
+                    <br />
+                </div>
+                <div class="col-md-2">
+                    <br />
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <!--phân trang bên trên-->
+            <div class="page-header">
+                <div class="col-12 grid-margin stretch-card" id="form-nhap">
+                    <div class="card">
+                        <div class="card-body">
+                            <form class="forms-sample">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Mã Nhân Viên</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="MaNV">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Tên Nhân Viên</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="TenNV">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Địa Chỉ</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="DiaChi">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Số Điện Thoại</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="SoDienThoai">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Giới Tính</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="Select-GioiTinh">
+                                                    <option value="Nam">Nam</option>
+                                                    <option value="Nữ">Nữ</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Chức Vụ</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="Select-ChucVu">
+                                                    <option value="Quản Lí">Quản Lí</option>
+                                                    <option value="Nhân Viên">Nhân Viên</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Ngày Sinh</label>
+                                            <div class="col-sm-9">
+                                                <input type="datetime" class="form-control" id="NgaySinh" value="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group row ">
+                                            <label>Ảnh Nhân Viên</label>
+                                            <div class="col-md-3">
+                                                <img id="image-preview" style="width:150px; height:150px;" src="../assets/images/AvatarNV/macdinh.png" alt="Ảnh Nhân Viên">
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <input type="file" id="image-input" accept=".jpg,.jpeg,.png" value="Chọn Ảnh Nhân Viên" onchange="previewImage(event)">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <button type="button" class="btn btn-gradient-success" onclick="AddNV()" id="them">Thêm Mới</button>
+                                <a href="#form-table"> <button type="button" class="btn btn-gradient-primary btn-fw" id="luu" onclick="EditNV()"> Lưu </button></a>
+                                <br /> <br />
+                                <button type="button" class="btn btn-info btn-fw" onclick="cancel()">Hủy Bỏ</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--//user-->
+            <div >
+                <a href="#form-user"> 
+                    <button type="button" id="xemtk" class="btn btn-info btn-fw" onclick="SelectUser(MaNV_User)">Xem Tài Khoản</button> </a> 
+            </div>
+            <!--formuser-->
+            <div class="page-header">
+                <div class="col-12 grid-margin stretch-card" id="form-user">
+                    <div class="card">
+                        <div class="card-body">
+                            <form class="forms-sample">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Mã Nhân Viên</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="MaNVUser">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">UserName</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="username">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">PassWord</label>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" id="password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Email</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-gradient-primary btn-fw" id="luu" onclick="EditUser(MaNV_User)">Lưu</button>
+                                <a href="#form-nhap"> <button type="button" class="btn btn-info btn-fw" onclick="clearInputUser()">Hủy Bỏ</button> </a>
+</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--enduser-->
+        </div>
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script src="assets/vendors/chart.js/Chart.min.js"></script>
+        <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="assets/js/off-canvas.js"></script>
+        <script src="assets/js/hoverable-collapse.js"></script>
+        <script src="assets/js/misc.js"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page -->
+        <script src="assets/js/dashboard.js"></script>
+        <script src="assets/js/todolist.js"></script>
+        <!-- End custom js for this page -->
+        <script type="text/javascript">
+            let MaNV_User = ""; 
+            let url = 'https://localhost:44344/api/';
+            let searchParams = new URLSearchParams(window.location.search);
+            let GetTen = searchParams.get("Ten");
+            let GetChucVu = searchParams.get("ChucVu");
+            let GetAnh = searchParams.get("Anh");
+            $(document).ready(function () {
+                if (GetTen == "" || GetTen == null) {
+                    alert("Vui lòng đăng nhập");
+                    window.location.href = "../../login.html";
+                    return;
+                }
+                Load();
+            });
+            function Load() {
+                LoadUser();
+                if (GetChucVu == "Nhân Viên") {
+                    document.getElementById("form-nhap").style.display = "none";
+                }
+                document.getElementById("them").style.display = "block";
+                document.getElementById("luu").style.display = "none";
+                document.getElementById("xemtk").disabled = true;
+                document.getElementById("form-user").style.display = "none";
+                document.getElementById("quaylai").style.display = "none";
+                GetNVList();
+            }
+            function QuayLai() {
+                document.getElementById("timkiem").style.display = "block";
+                document.getElementById("btntimkiem").style.display = "block";
+                document.getElementById("reset").style.display = "block";
+                document.getElementById("form-nhap").style.display = "block";
+                document.getElementById("thungrac").style.display = "block";
+                document.getElementById("quaylai").style.display = "none";
+                Load();
+            }
+            function GetThungRac() {
+                document.getElementById("timkiem").style.display = "none";
+                document.getElementById("btntimkiem").style.display = "none";
+                document.getElementById("reset").style.display = "none";
+                document.getElementById("form-nhap").style.display = "none";
+                document.getElementById("thungrac").style.display = "none";
+                document.getElementById("quaylai").style.display = "block";
+
+                $.ajax({
+                    url: url + 'NhanVien',
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        let table = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            if (data[i].IsDeleted == 1) {
+                                table = table + '<tr class="table-danger">';
+
+                                table = table + '<td>' + data[i].MaNV + '</td>';
+                                table = table + '<td>' + data[i].TenNV + '</td>';
+                                table = table + '<td>' + data[i].NgaySinh + '</td>';
+                                table = table + '<td>' + data[i].GioiTinh + '</td>';
+                                table = table + '<td>' + data[i].DiaChi + '</td>';
+                                table = table + '<td>' + data[i].SoDienThoai + '</td>';
+                                table = table + '<td>' + data[i].Anh + '</td>';
+                                table = table + '<td>' + data[i].ChucVu + '</td>';
+                                if (GetChucVu == "Quản Lí") {
+                                    table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success btn-sm" onclick="KhoiPhuc(\'' + data[i].MaNV + '\')">Khôi Phục</button> </a></td>';
+                                    table = table + '<td> <button type="button" class="btn btn-danger btn-sm"  onclick="Xoa(\'' + data[i].MaNV + '\')">Xóa</button> </td>';
+
+                                }
+                                table = table + '</tr>';
+                            }
+
+                        }
+                        document.getElementById('AllNV').innerHTML = table;
+                    }
+                })
+
+            }
+            function KhoiPhuc(MaNV) {
+                if (confirm("Bạn có chắc muốn khôi phục?")) {
+                    $.ajax({
+                        url: url + "nhanvien?id=" + MaNV + "&&xoa=0",
+                        method: 'PUT',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        error: function () {
+                            alert("Khôi phục nhân viên có mã nhân viên: " + MaNV + "không thành công ! ");
+                        },
+                        success: function () {
+                            alert("Khôi phục nhân viên có mã nhân viên: " + MaNV + " thành công!");
+                            GetThungRac();
+                        }
+                    })
+                }
+            }
+            function Xoa(MaNV) {
+                if (confirm("Bạn có chắc muốn xóa vĩnh viễn?")) {
+                    $.ajax({
+                        url: url + "nhanvien?id=" + MaNV + "&&xoa=-1",
+                        method: 'PUT',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        error: function () {
+                            alert("Xóa vĩnh viễn nhân viên có mã nhân viên: " + MaNV + "không thành công ! ");
+                        },
+                        success: function () {
+                            alert("Xóa vĩnh viễn nhân viên có mã nhân viên: " + MaNV + " thành công!");
+                            GetThungRac();
+                        }
+                    })
+                }
+            }
+            function LoadDoanhThu() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../doanhthu.html" + queryString;
+            }
+            function LoadSanPham() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../index.html" + queryString;
+            }
+            function LoadHoaDon() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../hoadon.html" + queryString;
+            }
+            function LoadNhanVien() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../nhanvien.html" + queryString;
+            }
+            function LoadHoaDonBan() {
+                // Truyền dữ liệu từ trang A sang trang B
+                var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+                var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+                window.location.href = "../../hoadonban.html" + queryString;
+            }
+            function LoadUser() {
+                document.getElementById("profileTen").innerHTML = GetTen;
+                document.getElementById("profileCV").innerHTML = GetChucVu;
+                document.getElementById("profileAnh").src = "../assets/images/AvatarNV/" + GetAnh;
+
+            }
+            function cancel() {
+                clearInput();
+                clearInputUser();
+                document.getElementById("xemtk").disabled = true;
+                document.getElementById("form-user").style.display = "none";
+            }
+            function validateUser() {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var email = $("#email").val();
+                if (username == '' || password == '' || email == '') {
+                    alert('Vui lòng nhập đầy đủ thông tin!');
+                    return false;
+                }
+                return true;
+            }
+            function AddUser() {
+                $.ajax({
+                    url: url + "user",
+                    method: "POST",
+                    data: JSON.stringify({
+                        "MaNV": $("#MaNV").val(),
+                        "Username": $("#username").val(),
+                        "Password": $("#password").val(),
+                        "Email": $("#email").val()
+                    }),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    error: function (res) {
+                        console.log(0);
+                    },
+                    success: function (res) {
+                        alert("Thêm mới thành công!");
+                        GetSanPhamList();
+                        console.log(1);
+                        // xóa dữ liệu trên các ô vừa điền sau khi thêm mới thành công
+                        clearInput();
+                    }
+                });
+            }
+            function EditUser(MaNV) {
+                if (!validateUser()) {
+                    return;
+                }
+                $.ajax({
+                    url: url + "user/" + MaNV,
+                    method: "Get",
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data == null) {
+                            AddUser();
+                            return;
+                        }
+                        if (confirm("Bạn có chắc muốn sửa?")) {
+
+                            $.ajax({
+                                url: url + "user/" + MaNV,
+                                method: "PUT",
+                                contentType: 'application/json',
+                                dataType: 'json',
+                                data: JSON.stringify({
+                                    "MaNV": $("#MaNVUser").val(),
+                                    "Username": $("#username").val(),
+                                    "Password": $("#password").val(),
+                                    "Email": $("#email").val()
+                                }),
+                                error: function (data) {
+                                    alert("Sửa không thành công!");
+                                },
+                                success: function (data) {
+                                    alert("Sửa thành công!");
+                                    GetNVList();
+                                    // xóa dữ liệu trên các ô vừa điền sau khi thêm mới thành công
+                                    clearInput();
+                                }
+                            });
+                        }
+
+                    }
+                });
+            }
+            function SelectUser(MaNV) {
+                document.getElementById("form-user").style.display = "block";
+                $.ajax({
+                    url: url + 'User/' + MaNV,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#MaNVUser").val(data.MaNV),
+                            $("#username").val(data.Username),
+                            $("#password").val(data.Password),
+                            $("#email").val(data.Email)
+                    }
+
+                })
+                $("#MaNVUser").prop('disabled', true);
+                document.getElementById("MaNVUser").value = document.getElementById("MaNV").value;
+            }
+            function clearInputUser() {
+                $("#MaNVUser").val("");
+                $("#username").val("");
+                $("#password").val("");
+                $("#email").val("");
+                document.getElementById("form-user").style.display = "none";
+
+            }
+            function previewImage(event) {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var preview = document.getElementById('image-preview');
+                    preview.src = reader.result;
+                }
+                reader.readAsDataURL(event.target.files[0]);
+            }
+            //lấy thông tin từ bảng nhân viên
+            function GetNVList() {
+                $.ajax({
+                    url: url + 'NhanVien',
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        let table = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            if (data[i].IsDeleted == 0) {
+                                if (i % 3 == 0) {
+                                    table = table + '<tr class="table-info">';
+                                }
+                                else if (i % 3 == 1) {
+                                    table = table + '<tr class="table-warning">';
+                                } 
+                                table = table + '<td>' + data[i].MaNV + '</td>';
+                                table = table + '<td>' + data[i].TenNV + '</td>';
+                                table = table + '<td>' + data[i].NgaySinh + '</td>';
+                                table = table + '<td>' + data[i].GioiTinh + '</td>';
+                                table = table + '<td>' + data[i].DiaChi + '</td>';
+                                table = table + '<td>' + data[i].SoDienThoai + '</td>';
+                                table = table + '<td>' + data[i].Anh + '</td>';
+                                table = table + '<td>' + data[i].ChucVu + '</td>';
+                                if (GetChucVu == "Quản Lí") {
+                                    table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success btn-sm" onclick="GetNV(\'' + data[i].MaNV + '\')">Chi tiết</button> </a></td>';
+                                    table = table + '<td> <button type="button" class="btn btn-danger btn-sm"  onclick="DeleteNV(\'' + data[i].MaNV + '\')">Xóa</button> </td>';
+
+                                }
+                                table = table + '</tr>';
+                            }
+                            
+                        }
+                        document.getElementById('AllNV').innerHTML = table;
+                    }
+                })
+            }
+            //chi tiet 1 sanpham theo mã sp khi ấn vào chi tiết
+            function GetNV(MaNV) {
+                document.getElementById("them").style.display = "none";
+                document.getElementById("luu").style.display = "block";
+                document.getElementById("xemtk").disabled = false;
+                clearInputUser();
+                MaNV_User = MaNV;
+                $.ajax({
+                    url: url + 'NhanVien/' + MaNV,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#MaNV").val(data.MaNV).prop('disabled', true);
+                        $("#MaNV").val(data.MaNV),
+                            $("#TenNV").val(data.TenNV),
+                            $("#NgaySinh").val(data.NgaySinh),
+                            $("#Select-GioiTinh").val(data.GioiTinh),
+                            $("#DiaChi").val(data.DiaChi),
+                            $("#SoDienThoai").val(data.SoDienThoai),
+                            $("#Select-ChucVu").val(data.ChucVu),
+                            $("#Anh").val(data.Anh)
+                        if (data.Anh == null || data.Anh == '') {
+                            data.Anh = "macdinh.png";
+                        }
+                        document.getElementById('image-preview').src = "../assets/images/AvatarNV/" + data.Anh;
+                    }
+
+                })
+            }
+            //kiểm tra xem người dùng đã nhập đủ thông tin chưa
+            function validateInput() {
+                var MaNV = $("#MaNV").val();
+                var TenNV = $("#TenNV").val();
+                var DiaChi = $("#DiaChi").val();
+                var NgaySinh = $("#NgaySinh").val();
+                var GioiTinh = $("#Select-GioiTinh").val();
+                var SoDienThoai = $("#SoDienThoai").val();
+                var ChucVu = $("#Select-ChucVu").val();
+                var Anh = $("#image-input").val();
+                if (MaNV == '' || TenNV == '' || DiaChi == '' || NgaySinh == '' || GioiTinh == null || SoDienThoai == '' || ChucVu == null) {
+                    alert('Vui lòng nhập đầy đủ thông tin!');
+                    return false;
+                }
+                return true;
+            }
+            //clear
+            function clearInput() {
+                document.getElementById("them").style.display = "block";
+                document.getElementById("luu").style.display = "none";
+                document.getElementById("MaNV").disabled = false;
+                $("#MaNV").val("");
+                $("#TenNV").val("");
+                $("#DiaChi").val("");
+                $("#NgaySinh").val("");
+                $("#Select-GioiTinh").val("Nam");
+                $("#SoDienThoai").val("");
+                $("#image-input").val("");
+                $("#Select-ChucVu").val("Nhân Viên");
+
+            }
+            //reset
+            function Reset() {
+                GetNVList();
+                document.getElementById("timkiem").value = "";
+            }
+            function AddNV() {
+                if (!validateInput()) {
+                    return;
+                }
+
+                var MaNV = $("#MaNV").val();
+                // Kiểm tra xem mã sp đã tồn tại hay chưa
+                $.ajax({
+                    url: url + "nhanvien/" + MaNV,
+                    method: "GET",
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res != null) {
+                            alert("Mã nhân viên đã tồn tại!");
+                            return;
+                        }
+                        const file = $("#image-input").val();
+                        const fileAnh = file.split("\\");
+                        // Thêm sp mới
+                        $.ajax({
+                            url: url + "NhanVien",
+                            method: "POST",
+                            data: JSON.stringify({
+                                "MaNV": $("#MaNV").val(),
+                                "TenNV": $("#TenNV").val(),
+                                "DiaChi": $("#DiaChi").val(),
+                                "NgaySinh": $("#NgaySinh").val(),
+                                "GioiTinh": $("#Select-GioiTinh").val(),
+                                "ChucVu": $("#Select-ChucVu").val(),
+                                "SoDienThoai": $("#SoDienThoai").val(),
+                                "Anh": fileAnh[fileAnh.length - 1]
+                            }),
+                            contentType: 'application/json',
+                            dataType: 'json',
+                            error: function (res) {
+                                alert("Thêm mới không thành công!");
+                                console.log(0);
+                            },
+                            success: function (res) {
+                                alert("Thêm mới thành công!");
+                                GetNVList();
+                                console.log(1);
+                                // xóa dữ liệu trên các ô vừa điền sau khi thêm mới thành công
+                                clearInput();
+                            }
+                        });
+                    },
+                    error: function (res) {
+                        alert("Có lỗi xảy ra khi kiểm tra mã nhân viên!");
+                    }
+                });
+            }
+            //sua 1 san pham
+            function EditNV() {
+                if (!validateInput()) {
+                    return;
+                }
+                const file = $("#image-input").val();
+                const fileAnh = file.split("\\");
+                if (confirm("Bạn có chắc muốn sửa?")) {
+                    var MaNV = $("#MaNV").val();
+                    $.ajax({
+                        url: url + "NhanVien/" + MaNV,
+                        method: "PUT",
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        data: JSON.stringify({
+                            "MaNV": $("#MaNV").val(),
+                            "TenNV": $("#TenNV").val(),
+                            "DiaChi": $("#DiaChi").val(),
+                            "NgaySinh": $("#NgaySinh").val(),
+                            "GioiTinh": $("#Select-GioiTinh").val(),
+                            "ChucVu": $("#Select-ChucVu").val(),
+                            "SoDienThoai": $("#SoDienThoai").val(),
+                            "Anh": fileAnh[fileAnh.length - 1]
+                        }),
+                        error: function (data) {
+                            alert("Sửa không thành công!");
+                        },
+                        success: function (data) {
+                            alert("Sửa thành công!");
+                            GetNVList();
+                            // xóa dữ liệu trên các ô vừa điền sau khi thêm mới thành công
+                            clearInput();
+                        }
+                    });
+                }
+            }
+            //tim kiem theo ten
+            function searchSPByName() {
+                var name = $("#timkiem").val();
+                if (name == "") {
+                    alert("Vui lòng nhập tên sản nhân viên !");
+                    return;
+                }
+                $.ajax({
+                    url: url + "nhanvien?name=" + name,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.length <= 0) {
+                            alert("Không có nhân viên cần tìm !");
+                            $("#timkiem").val("");
+                            return;
+
+                        }
+                        let table = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            if (data[i].IsDeleted == 0) {
+                                if (i % 3 == 0) {
+                                    table = table + '<tr class="table-info">';
+                                }
+                                else if (i % 3 == 1) {
+                                    table = table + '<tr class="table-warning">';
+                                } else {
+                                    table = table + '<tr class="table-danger">';
+                                }
+                                table = table + '<td>' + data[i].MaNV + '</td>';
+                                table = table + '<td>' + data[i].TenNV + '</td>';
+                                table = table + '<td>' + data[i].NgaySinh + '</td>';
+                                table = table + '<td>' + data[i].GioiTinh + '</td>';
+                                table = table + '<td>' + data[i].DiaChi + '</td>';
+                                table = table + '<td>' + data[i].SoDienThoai + '</td>';
+                                table = table + '<td>' + data[i].Anh + '</td>';
+                                table = table + '<td>' + data[i].ChucVu + '</td>';
+                                table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success" onclick="GetNV(\'' + data[i].MaNV + '\')">Chi tiết</button> </a></td>';
+                                table = table + '<td> <button type="button" class="btn btn-danger"  onclick="XoaNV(\'' + data[i].MaNV + '\')">Xóa</button> </td>';
+                                table = table + '</tr>';
+                            }
+
+                        }
+                        document.getElementById('AllNV').innerHTML = table;
+
+                    },
+                    error: function (data) {
+                        alert("Lỗi khi tìm kiếm tên nhân viên!");
+                    }
+                });
+            }
+            //tim kiem theo ma
+            function searchSPByID() {
+                var MaNV = $("#timkiem").val();
+                if (MaNV == "") {
+                    alert("Vui lòng nhập mã nhân viên !");
+                    return;
+                }
+                $.ajax({
+                    url: url + "nhanvien/" + MaNV,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    error: function (data) {
+                        alert("Không có nhân viên cần tìm !");
+                        $("#timkiem").val("");
+                        console.log(0);
+                    },
+                    success: function (data) {
+                        let table = '';
+
+                        if (data.IsDeleted == 0) {
+                            table = table + '<tr class="table-danger">';
+                            table = table + '<td>' + data.MaNV + '</td>';
+                            table = table + '<td>' + data.TenNV + '</td>';
+                            table = table + '<td>' + data.NgaySinh + '</td>';
+                            table = table + '<td>' + data.GioiTinh + '</td>';
+                            table = table + '<td>' + data.DiaChi + '</td>';
+                            table = table + '<td>' + data.SoDienThoai + '</td>';
+                            table = table + '<td>' + data.Anh + '</td>';
+                            table = table + '<td>' + data.ChucVu + '</td>';
+                            table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success" onclick="GetNV(\'' + data.MaNV + '\')">Chi tiết</button> </a></td>';
+                            table = table + '<td> <button type="button" class="btn btn-danger"  onclick="XoaNV(\'' + data.MaNV + '\')">Xóa</button> </td>';
+                            table = table + '</tr>';
+                        }
+                        document.getElementById('AllNV').innerHTML = table;
+                }
+                });
+            }
+            //option tim kiem
+            function search() {
+                var selectElement = document.getElementById("my-select");
+                var selectedValue = selectElement.value;
+                if (selectedValue == "MaNV") {
+                    searchSPByID();
+                } else {
+                    searchSPByName();
+                }
+
+            }
+            //xoa nhan vien
+            function DeleteNV(MaNV) {
+                console.log("Da xoa");
+                if (confirm("Bạn có chắc muốn xóa?")) {
+                    DeleteUser(MaNV)
+                    $.ajax({
+                        url: url + "nhanvien?id=" + MaNV+"&&xoa=1",
+                        method: 'PUT',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        error: function () {
+                            alert("Xóa nhân viên có mã nhân viên: " + MaNV + "không thành công ! ");
+                        },
+                        success: function () {
+                            alert("Xóa nhân viên có mã nhân viên: " + MaNV + " thành công!");
+                            GetNVList();
+                        }
+                    });
+                }
+            }
+            function DeleteUser(MaNV) {
+                $.ajax({
+                    url: url + "user/" + MaNV,
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    error: function () {
+                        alert("Xóa tài khoản có mã nhân viên: " + MaNV + "không thành công ! ");
+                    },
+                    success: function () {
+                        alert("Xóa tài khoản có mã nhân viên: " + MaNV + " thành công!");
+                        GetNVList();
+                    }
+                })
+            }
+    </script>
+</html >

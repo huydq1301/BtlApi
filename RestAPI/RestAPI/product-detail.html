@@ -1,0 +1,313 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="AssetsUser/css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="AssetsUser/css/icomoon.css">
+    <!-- Ion Icon Fonts-->
+    <link rel="stylesheet" href="AssetsUser/css/ionicons.min.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="AssetsUser/css/bootstrap.min.css">
+
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="AssetsUser/css/magnific-popup.css">
+
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="AssetsUser/css/flexslider.css">
+    <script type="text/javascript" src="Scripts/jquery-3.4.1.js"></script>
+
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="AssetsUser/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="AssetsUser/css/owl.theme.default.min.css">
+
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="AssetsUser/css/bootstrap-datepicker.css">
+    <!-- Flaticons  -->
+    <link rel="stylesheet" href="AssetsUser/fonts/flaticon/font/flaticon.css">
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="AssetsUser/css/style.css">
+
+</head>
+<body>
+
+    <div class="colorlib-loader"></div>
+
+    <div id="page">
+        <nav class="colorlib-nav" role="navigation">
+            <div class="top-menu">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 text-left menu-1">
+                            <ul>
+                                <li><button type="button" onclick="loadhome()">Home</button></li>
+                                <li class="cart"><button type="button" onclick="loadcart()"><i class="icon-shopping-cart"></i> Cart [0]</button></li>
+                                <li><button type="button" onclick="loadprofile()">Profile</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="colorlib-product">
+            <div class="container">
+                <div class="row row-pb-lg product-detail-wrap">
+                    <div class="col-sm-8">
+                        <img src="../assets/images/SanPham/" id="Anh" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="product-desc">
+                            <div class="size-wrap">
+                                <div class="block-26 mb-2">
+                                    <h4>Tên Sản Phẩm</h4>
+                                    <ul>
+                                        <li>
+                                            <input type="text" id="TenSP">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="block-26 mb-2">
+                                    <h4>Giá Sản Phẩm</h4>
+                                    <ul>
+                                        <li>
+                                            <input type="text" id="GiaSP">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="block-26 mb-2">
+                                    <h4>Ghi Chú</h4>
+                                    <ul>
+                                        <li>
+                                            <input type="text" id="GhiChu">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="size-wrap">
+                                <div class="block-26 mb-2">
+                                    <h4>Size</h4>
+                                    <ul>
+                                        <li>
+                                            <input type="text" id="Size">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="block-26 mb-4">
+                                    <h4>Màu</h4>
+                                    <ul>
+                                        <li>
+                                            <input type="text" id="Mau">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div> <h5>Số Lượng</h5></div>
+                            <div class="input-group mb-4">
+                                <span class="input-group-btn">
+                                    <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="" onclick="Giam()">
+                                        <i class="icon-minus2"></i>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="form-control input-number" value="0" >
+                                <span class="input-group-btn ml-1">
+                                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="" onclick="Tang()">
+                                        <i class="icon-plus2"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <p class="addtocart"><button type="button" class="btn btn-primary btn-addtocart" onclick="getcart()"><i class="icon-shopping-cart"></i> Thêm Vào Giỏ Hàng</button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+    </div>
+
+    <!-- jQuery -->
+    <script src="AssetsUser/js/jquery.min.js"></script>
+    <!-- popper -->
+    <script src="AssetsUser/js/popper.min.js"></script>
+    <!-- bootstrap 4.1 -->
+    <script src="AssetsUser/js/bootstrap.min.js"></script>
+    <!-- jQuery easing -->
+    <script src="AssetsUser/js/jquery.easing.1.3.js"></script>
+    <!-- Waypoints -->
+    <script src="AssetsUser/js/jquery.waypoints.min.js"></script>
+    <!-- Flexslider -->
+    <script src="AssetsUser/js/jquery.flexslider-min.js"></script>
+    <!-- Owl carousel -->
+    <script src="AssetsUser/js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="AssetsUser/js/jquery.magnific-popup.min.js"></script>
+    <script src="AssetsUser/js/magnific-popup-options.js"></script>
+    <!-- Date Picker -->
+    <script src="AssetsUser/js/bootstrap-datepicker.js"></script>
+    <!-- Stellar Parallax -->
+    <script src="AssetsUser/js/jquery.stellar.min.js"></script>
+    <!-- Main -->
+    <script src="AssetsUser/js/main.js"></script>
+    <script type="text/javascript">
+        var k = 0;
+        let url = 'https://localhost:44344/api/';
+        let searchParams = new URLSearchParams(window.location.search);
+        let GetMaSP = '';
+        let GetAnhSP = '';
+        let GetTen = searchParams.get("Ten");
+        let GetAnh = searchParams.get("Anh");
+        let GetMa = searchParams.get("Ma");
+        let SoLuong = 0;
+        $(document).ready(function () {
+            if (GetTen == "" || GetTen == null) {
+                alert("Vui lòng đăng nhập");
+                window.location.href = "../../loginkh.html";
+                return;
+            }
+            document.getElementById('TenSP').disabled = true;
+            document.getElementById('Mau').disabled = true;
+            document.getElementById('Size').disabled = true;
+            document.getElementById('GhiChu').disabled = true;
+            document.getElementById('GiaSP').disabled = true;
+            GetMaSP = searchParams.get("masp");
+            console.log(GetMaSP);
+            GetSP(GetMaSP);
+        });
+        function getcart() {
+            var temp = document.getElementById('quantity').value;
+            if (temp == 0) {
+                alert("Số Lượng Mua Phải >0");
+                return;
+            }
+            $.ajax({
+                url: url + "GioHang?masp=" + GetMaSP,
+                method: "GET",
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (res) {
+                    if (res != null) {
+                        alert("Mã sản phẩm đã tồn tại trong giỏ hàng!");
+                        return;
+                    }
+                    var temp = document.getElementById('quantity').value;
+                    console.log(temp);
+                    // Thêm sp mới
+                    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                    var giohang = 'GioHang';
+                    for (var i = 0; i < 3; i++) {
+                        var randomIndex = Math.floor(Math.random() * chars.length);
+                        giohang += chars[randomIndex];
+                    }
+                    $.ajax({
+                        url: url + "GioHang",
+                        method: "POST",
+                        data: JSON.stringify({
+                            "ID": giohang,
+                            "MaSP": GetMaSP,
+                            "TenSP": $("#TenSP").val(),
+                            "GiaTien": $("#GiaSP").val(),
+                            "SoLuong": temp,
+                            "Anh": GetAnhSP,
+                            "MaKH": GetMa
+                        }),
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        error: function (res) {
+                            alert("Thêm mới không thành công!");
+                            console.log(0);
+                        },
+                        success: function (res) {
+                            $.ajax({
+                                url: url + "giohang?id=" + giohang + "&&xoa=0",
+                                method: 'PUT',
+                                contentType: 'application/json',
+                                dataType: 'json',
+                                error: function () {
+                                    console.log(0);
+                                },
+                                success: function () {
+                                }
+                            });
+                            alert("Thêm mới thành công!");
+                            window.location.href = "../../cart.html?Ten=" + GetTen + "&Ma=" + GetMa + "&Anh=" + GetAnh;
+                            console.log(1);
+                        }
+                    });
+                },
+                error: function (res) {
+                    alert("Có lỗi xảy ra khi kiểm tra mã sản phẩm!");
+                }
+            });
+        }
+        function loadhome() {
+
+            window.location.href = "../../indexuser.html?Ten=" + GetTen + "&Ma=" + GetMa + "&Anh=" + GetAnh;
+        }
+        function loadcart() {
+            window.location.href = "../../cart.html?Ten=" + GetTen + "&Ma=" + GetMa + "&Anh=" + GetAnh;
+        }
+        function loadprofile() {
+            window.location.href = "../../profile.html?Ten=" + GetTen + "&Ma=" + GetMa + "&Anh=" + GetAnh;
+        }
+        function GetSP(GetMaSP) {
+            $.ajax({
+                url: url + "sanpham/" + GetMaSP,
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                        $("#TenSP").val(data.TenSP),
+                        $("#Mau").val(data.tblMauSac.TenMau),
+                        $("#Size").val(data.tblSize.TenSize),
+                        $("#GhiChu").val(data.GhiChu),
+                        $("#GiaSP").val(data.DonGiaBan),    
+                        document.getElementById('Anh').src = "../assets/images/SanPham/" + data.Anh;
+                        SoLuong = data.SoLuong;
+                        GetAnhSP = data.Anh;
+
+                }
+
+            })
+
+        }
+        function Giam() {
+            var temp = document.getElementById('quantity').value;
+            document.getElementById('quantity').value -= 1; 
+            if (document.getElementById('quantity').value <= 0) {
+                alert('Số Lượng Mua Phải Lớn Hơn 0');
+                document.getElementById('quantity').value = '';
+                document.getElementById('quantity').value = temp; 
+            }
+        }
+        function Tang() {
+            var temp = document.getElementById('quantity').value;
+            document.getElementById('quantity').value -= -1;
+            if (document.getElementById('quantity').value > SoLuong) {
+                alert('Số Lượng Mua Phải Nhỏ Hơn Hoặc Bằng Số Lượng Có');
+                document.getElementById('quantity').value = '';
+                document.getElementById('quantity').value = temp; 
+            }
+        }
+    </script>
+</body>
+</html>
+

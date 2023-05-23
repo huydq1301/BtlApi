@@ -1,0 +1,749 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+    <script type="text/javascript" src="Scripts/jquery-3.4.1.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <!-- End layout styles -->
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item nav-profile">
+                    <a href="#" class="nav-link">
+                        <div class="nav-profile-image">
+                            <img id="profileAnh" src="../assets/images/AvatarNV/macdinh.png" alt="profile">
+                            <span class="login-status online"></span>
+                            <!--change to offline or busy as needed-->
+                        </div>
+                        <div class="nav-profile-text d-flex flex-column">
+                            <span id="profileTen" class="font-weight-bold mb-2">Tên</span>
+                            <span id="profileCV" class="text-secondary text-small">Chức Vụ</span>
+                        </div>
+                        <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-primary btn-fw" id="loadsanpham" onclick="LoadSanPham()">Sản Phẩm</button>
+
+                </li>
+                <div><br /></div>
+                <li></li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-warning btn-fw" id="loadhoadon" onclick="LoadHoaDon()">Hóa Đơn Nhập</button>
+
+                </li>
+                <div><br /></div>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-info btn-fw" id="loadhoadonban" onclick="LoadHoaDonBan()">Hóa Đơn Bán</button>
+
+                </li>
+                <div><br /></div>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-success btn-fw" id="loadnhanvien" onclick="LoadNhanVien()">Nhân Viên</button>
+
+                </li>
+                <div><br /></div>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-gradient-danger btn-fw" id="loaddoanhthu" onclick="LoadDoanhThu()">Doanh Thu</button>
+                </li>
+            </ul>
+        </nav>
+        <!-- partial -->
+        <div class="content-wrapper">
+            <div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-danger" id="thungrac" onclick="GetThungRac()">Thùng Rác</button>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-danger" id="quaylai" onclick="QuayLai()">Quay Lại</button>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-info" id="reset" onclick="Reset()">Reset</button>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <button class="btn btn-warning" id="btntimkiem" onclick="search()">Tìm Kiếm</button>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="my-select" class="form-control" style="background-color: gray">
+                            <option value="mahoadonban">Mã Hóa Đơn</option>
+                        </select>
+                        <input id="timkiem" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-12 stretch-card">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Mã Hóa Đơn</th>
+                                        <th>Tên Nhân Viên</th>
+                                        <th>Ngày Bán</th>
+                                        <th>Tên Khách Hàng</th>
+                                        <th colspan="2">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ALLhoadonban"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- phân trang vào đây-->
+            <div class="row">
+                <div class="col-md-2">
+                    <br />
+                </div>
+                <div class="col-md-2">
+                    <br />
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <!--phân trang bên trên-->
+            <div class="page-header">
+                <div class="col-12 grid-margin stretch-card" id="form-nhap">
+                    <div class="card">
+                        <div class="card-body">
+                            <form class="forms-sample">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Mã Hóa Đơn</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="Mahoadonban">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Mã Nhân Viên</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="NhanVienSelect">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Ngày Bán</label>
+                                            <div class="col-sm-9">
+                                                <input type="datetime" class="form-control" id="NgayNhap">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Khách Hàng</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="NhaCungCapSelect">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-gradient-success" onclick="Addhoadonban()" id="them">Thêm Mới</button>
+                                <a href="#form-table"> <button type="button" class="btn btn-gradient-primary btn-fw" id="luu" onclick="EditHD()">Lưu</button></a>
+                                <br /> <br />
+                                <button type="button" class="btn btn-info btn-fw" onclick="cancel()">Hủy Bỏ</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--//user-->
+            <div>
+                <a href="#table-chitiet"> <button type="button" id="xemhoadonban" class="btn btn-info btn-fw" onclick="SelectCT(MaCTHDN)">Xem Chi Tiết Hóa Đơn</button>
+                </a>
+            </div>
+            <!--formuser-->
+            <div class="col-lg-12 stretch-card" id="table-chitiet">
+
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Mã Hóa Đơn</th>
+                                    <th>Mã Sản Phẩm</th>
+                                    <th>Số Lượng Bán</th>
+                                    <th>Thành Tiền</th>
+                                    <!--<th colspan="2">Hành động</th>-->
+                                </tr>
+                            </thead>
+                            <tbody id="AllCThoadonban"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- phân trang vào đây-->
+            <div class="row">
+                <div class="col-md-2">
+                    <br />
+                </div>
+                <div class="col-md-2">
+                    <br />
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <div class="page-header">
+                <div class="col-12 grid-margin stretch-card" id="form-nhap-ct">
+                    <div class="card">
+                        <div class="card-body">
+                            <form class="forms-sample">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Mã Hóa Đơn</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="MahoadonbanCT">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Mã Sản Phẩm</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="MaSP">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Số Lượng Bán</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" class="form-control" id="SlNhap">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Thành Tiền</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="ThanhTien">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-gradient-primary btn-fw" id="luu" onclick="EditUser(MaNV_User)">Lưu</button>
+                                <a href="#table-chitiet"> <button type="button" class="btn btn-info btn-fw" onclick="clearInputUser()">Hủy Bỏ</button> </a>
+                            </form>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--enduser-->
+        </div>
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/todolist.js"></script>
+    <!-- End custom js for this page -->
+    <script type="text/javascript">
+        let MaCTHDN = "";
+        let searchParams = new URLSearchParams(window.location.search);
+        let GetTen = searchParams.get("Ten");
+        let GetChucVu = searchParams.get("ChucVu");
+        let GetAnh = searchParams.get("Anh");
+        let url = 'https://localhost:44344/api/';
+        $(document).ready(function () {
+            if (GetTen == "" || GetTen == null) {
+                alert("Vui lòng đăng nhập");
+                window.location.href = "../../login.html";
+                return;
+            }
+            Load();
+        });
+        function Load() {
+            //load du lieu
+            document.getElementById("them").style.display = "block";
+            document.getElementById("luu").style.display = "none";
+            document.getElementById("xemhoadonban").disabled = true;
+            document.getElementById("table-chitiet").style.display = "none";
+            document.getElementById("form-nhap-ct").style.display = "none";
+            document.getElementById("quaylai").style.display = "none";
+            GethoadonbanList();
+            GetNCCList();
+            GetNVList();
+            LoadUser();
+        }
+        function QuayLai() {
+            document.getElementById("btntimkiem").style.display = "block";
+            document.getElementById("timkiem").style.display = "block";
+            document.getElementById("reset").style.display = "block";
+            document.getElementById("form-nhap-ct").style.display = "block";
+            document.getElementById("table-chitiet").style.display = "block";
+            document.getElementById("form-nhap").style.display = "block";
+            document.getElementById("thungrac").style.display = "block";
+            document.getElementById("quaylai").style.display = "none";
+            Load();
+        }
+        function GetThungRac() {
+            document.getElementById("btntimkiem").style.display = "none";
+            document.getElementById("timkiem").style.display = "none";
+            document.getElementById("reset").style.display = "none";
+            document.getElementById("form-nhap").style.display = "none";
+            document.getElementById("table-chitiet").style.display = "none";
+            document.getElementById("form-nhap-ct").style.display = "none";
+            document.getElementById("thungrac").style.display = "none";
+            document.getElementById("quaylai").style.display = "block";
+            document.getElementById("xemhoadonban").disabled = true;
+            $.ajax({
+                url: url + 'hoadonban',
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    let table = '';
+                    for (var i = 0; i < data.length; ++i) {
+                        if (data[i].IsDeleted == 1) {
+                            if (i % 3 == 0) {
+                                table = table + '<tr class="table-info">';
+                            }
+                            else if (i % 3 == 1) {
+                                table = table + '<tr class="table-warning">';
+                            } else {
+                                table = table + '<tr class="table-danger">';
+                            }
+                            table = table + '<td>' + data[i].MaHDB + '</td>';
+                            table = table + '<td>' + data[i].tblNV.TenNV + '</td>';
+                            table = table + '<td>' + data[i].NgayBan + '</td>';
+                            table = table + '<td>' + data[i].tblKhachHang.TenKH + '</td>';
+                            table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success btn-sm" onclick="KhoiPhuc(\'' + data[i].MaHDB + '\')">Khôi Phục</button> </a></td>';
+                            table = table + '<td> <button type="button" class="btn btn-danger btn-sm"  onclick="Xoa(\'' + data[i].MaHDB + '\')">Xóa</button> </td>';
+                            table = table + '</tr>';
+                        }
+
+                    }
+                    document.getElementById('ALLhoadonban').innerHTML = table;
+                }
+            })
+
+
+        }
+        function KhoiPhuc(MaHDB) {
+            if (confirm("Bạn có chắc muốn khôi phục?")) {
+                $.ajax({
+                    url: url + "hoadonban?id=" + MaHDB + "&&xoa=0",
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    error: function () {
+                        alert("Khôi phục hóa đơn bán có mã hóa đơn bán: " + MaHDB + "không thành công ! ");
+                    },
+                    success: function () {
+                        alert("Khôi phục hóa đơn bán có mã hóa đơn bán: " + MaHDB + " thành công!");
+                        GetThungRac();
+                    }
+                })
+            }
+        }
+        function Xoa(MaHDB) {
+            if (confirm("Bạn có chắc muốn xóa vĩnh viễn?")) {
+                $.ajax({
+                    url: url + "hoadonban?id=" + MaHDB + "&&xoa=-1",
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    error: function () {
+                        alert("Xóa vĩnh viễn hóa đơn bán có mã hóa đơn bán: " + MaHDB + "không thành công ! ");
+                    },
+                    success: function () {
+                        alert("Xóa vĩnh viễn hóa đơn bán có mã hóa đơn bán: " + MaHDB + " thành công!");
+                        GetThungRac();
+                    }
+                })
+            }
+        }
+        function LoadSanPham() {
+            // Truyền dữ liệu từ trang A sang trang B
+            var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+            var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+            window.location.href = "../../index.html" + queryString;
+        }
+        function Loadhoadon() {
+            // Truyền dữ liệu từ trang A sang trang B
+            var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+            var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+            window.location.href = "../../hoadon.html" + queryString;
+        }
+        function LoadNhanVien() {
+            // Truyền dữ liệu từ trang A sang trang B
+            var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+            var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+            window.location.href = "../../nhanvien.html" + queryString;
+        }
+        function LoadDoanhThu() {
+            // Truyền dữ liệu từ trang A sang trang B
+            var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+            var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+            window.location.href = "../../doanhthu.html" + queryString;
+        }
+        function Loadhoadonban() {
+            // Truyền dữ liệu từ trang A sang trang B
+            var data = { Ten: GetTen, ChucVu: GetChucVu, Anh: GetAnh };
+            var queryString = "?Ten=" + GetTen + "&ChucVu=" + GetChucVu + "&Anh=" + GetAnh;
+            window.location.href = "../../hoadonban.html" + queryString;
+        }
+        function LoadUser() {
+            document.getElementById("profileTen").innerHTML = GetTen;
+            document.getElementById("profileCV").innerHTML = GetChucVu;
+            document.getElementById("profileAnh").src = "../assets/images/AvatarNV/" + GetAnh;
+
+        }
+        //function Select1CTHD(MaHD, MaSP) {
+        //    $.ajax({
+        //        url: url + 'ChiTiethoadonbanBan/' + MaHDB,
+        //        method: 'GET',
+        //        contentType: 'application/json',
+        //        dataType: 'json',
+        //        success: function (data) {
+        //            $("#Mahoadonban").val(data.MaNV).prop('disabled', true);
+        //            $("#Mahoadonban").val(data.MaHDB),
+        //                $("#NhanVienSelect").val(data.MaNV),
+        //                $("#NhaCungCapSelect").val(data.MaNCC),
+        //                $("#NgayNhap").val(data.NgayNhap)
+        //        }
+
+        //    })
+        //}
+            function SelectCT(MaHD) {
+                document.getElementById("table-chitiet").style.display = "block";
+                $.ajax({
+                    url: url + 'ChiTiethoadonban/'+MaHD,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        let table = '';
+                        for (var i = 0; i < data.length; ++i) {
+                            if (i % 3 == 0) {
+                                table = table + '<tr class="table-info">';
+                            }
+                            else if (i % 3 == 1) {
+                                table = table + '<tr class="table-warning">';
+                            } else {
+                                table = table + '<tr class="table-danger">';
+                            }
+                            table = table + '<td>' + data[i].MaHDB + '</td>';
+                            table = table + '<td>' + data[i].MaSP + '</td>';
+                            table = table + '<td>' + data[i].SLBan + '</td>';
+                            table = table + '<td>' + data[i].ThanhTien + '</td>';
+                            //table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success btn-sm" onclick="Select1CTHD(\'' + data[i].MaHDB +',' + data[i].MaSP+'\')">Chi tiết</button> </a></td>';
+                            //table = table + '<td> <button type="button" class="btn btn-danger btn-sm"  onclick="GetCTHD(\'' + data[i].MaHDB + ',' + data[i].MaSP + '\')">Xóa</button> </td>';
+                            table = table + '</tr>';
+                        }
+                        document.getElementById('AllCThoadonban').innerHTML = table;
+                    }
+                })
+        }
+        function cancel() {
+            clearInput();
+            document.getElementById("xemhoadonban").disabled = true;
+            document.getElementById("table-chitiet").style.display = "none";
+            document.getElementById("form-nhap-ct").style.display = "none";
+        }
+        function GetNCCList() {
+            $.ajax({
+                url: url + "khachhang",
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    let options = '';
+                    for (var i = 0; i < data.length; ++i) {
+                        options = options + '<option value="' + data[i].MaKH + '">' + data[i].TenKH + '</option>';
+                    }
+                    $('#NhaCungCapSelect').html(options).prepend('<option value="" disabled selected hidden>--Chọn Tên Khách Hàng--</option>');
+                }
+            })
+        }
+        function GetNVList() {
+            $.ajax({
+                url: url + "nhanvien",
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    let options = '';
+                    for (var i = 0; i < data.length; ++i) {
+                        options = options + '<option value="' + data[i].MaNV + '">' + data[i].TenNV + '</option>';
+                    }
+                    $('#NhanVienSelect').html(options).prepend('<option value="" disabled selected hidden>--Chọn Tên Nhân Viên--</option>');
+                }
+            })
+        }
+
+        function GethoadonbanList() {
+            $.ajax({
+                url: url + 'hoadonban',
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    let table = '';
+                    for (var i = 0; i < data.length; ++i) {
+                        if (data[i].IsDeleted == 0) {
+                            if (i % 3 == 0) {
+                                table = table + '<tr class="table-info">';
+                            }
+                            else if (i % 3 == 1) {
+                                table = table + '<tr class="table-warning">';
+                            } else {
+                                table = table + '<tr class="table-danger">';
+                            }
+                            table = table + '<td>' + data[i].MaHDB + '</td>';
+                            table = table + '<td>' + data[i].tblNV.TenNV + '</td>';
+                            table = table + '<td>' + data[i].NgayBan + '</td>';
+                            table = table + '<td>' + data[i].tblKhachHang.TenKH + '</td>';
+                            table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success btn-sm" onclick="GetHD(\'' + data[i].MaHDB + '\')">Chi tiết</button> </a></td>';
+                            table = table + '<td> <button type="button" class="btn btn-danger btn-sm"  onclick="XoaHD(\'' + data[i].MaHDB + '\')">Xóa</button> </td>';
+                            table = table + '</tr>';
+                        }
+                        
+                    }
+                    document.getElementById('ALLhoadonban').innerHTML = table;
+                }
+            })
+        }
+        //chi tiet 1 sanpham theo mã sp khi ấn vào chi tiết
+        function GetHD(MaHDB) {
+            document.getElementById("them").style.display = "none";
+            document.getElementById("luu").style.display = "block";
+            document.getElementById("xemhoadonban").disabled = false;
+            document.getElementById("table-chitiet").style.display = "none";
+            MaCTHDN = MaHDB;
+            $.ajax({
+                url: url + 'hoadonban/' + MaHDB,
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    $("#Mahoadonban").val(data.MaNV).prop('disabled', true);
+                    $("#Mahoadonban").val(data.MaHDB),
+                        $("#NhanVienSelect").val(data.MaNV),
+                        $("#NhaCungCapSelect").val(data.MaKH),
+                        $("#NgayNhap").val(data.NgayBan)
+                }
+
+            })
+        }
+        //kiểm tra xem người dùng đã Bán đủ thông tin chưa
+        function validateInput() {
+            var MaHD = $("#Mahoadonban").val();
+            var NV = $("#NhanVienSelect").val();
+            var NhaCC = $("#NhaCungCapSelect").val();
+            var NgayNhap = $("#NgayNhap").val();
+            if (MaHD == '' || NV == '' || NhaCC == '' || NgayNhap == '' ) {
+                alert('Vui lòng Bán đầy đủ thông tin!');
+                return false;
+            }
+            return true;
+        }
+        //clear
+        function clearInput() {
+            document.getElementById("them").style.display = "block";
+            document.getElementById("luu").style.display = "none";
+            document.getElementById("Mahoadonban").disabled = false;
+            $("#Mahoadonban").val("");
+            $("#NhaCungCapSelect").val("");
+            $("#NgayNhap").val("");
+            $("#NhanVienSelect").val("");
+
+        }
+        //reset
+        function Reset() {
+            GethoadonbanList();
+            document.getElementById("timkiem").value = "";
+        }
+        function Addhoadonban() {
+            if (!validateInput()) {
+                return;
+            }
+
+            var MaHDB = $("#Mahoadonban").val();
+            // Kiểm tra xem mã sp đã tồn tại hay chưa
+            $.ajax({
+                url: url + "hoadonban/" + MaHDB,
+                method: "GET",
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (res) {
+                    if (res != null) {
+                        alert("Mã hóa đơn đã tồn tại!");
+                        return;
+                    }
+                    // Thêm sp mới
+                    $.ajax({
+                        url: url + "hoadonban",
+                        method: "POST",
+                        data: JSON.stringify({
+                            "MaHDB": $("#Mahoadonban").val(),
+                            "NgayBan": $("#NgayNhap").val(),
+                            "MaNV": $("#NhanVienSelect").val(),
+                            "MaKH": $("#NhaCungCapSelect").val()
+                        }),
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        error: function (res) {
+                            alert("Thêm mới không thành công!");
+                            console.log(0);
+                        },
+                        success: function (res) {
+                            alert("Thêm mới thành công!");
+                            GethoadonbanList();
+                            console.log(1);
+                            // xóa dữ liệu trên các ô vừa điền sau khi thêm mới thành công
+                            clearInput();
+                        }
+                    });
+                },
+                error: function (res) {
+                    alert("Có lỗi xảy ra khi kiểm tra mã hóa đơn!");
+                }
+            });
+        }
+        //sua 1 san pham
+        function EditHD() {
+            if (!validateInput()) {
+                return;
+            }
+            if (confirm("Bạn có chắc muốn sửa?")) {
+                var MaHD = $("#Mahoadonban").val();
+                //xu ly update ncc ben sp
+                $.ajax({
+                    url: url + "hoadonban/" + MaHD,
+                    method: "PUT",
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        "MaHDB": $("#Mahoadonban").val(),
+                        "NgayBan": $("#NgayNhap").val(),
+                        "MaNV": $("#NhanVienSelect").val(),
+                        "MaKH": $("#NhaCungCapSelect").val()
+                    }),
+                    error: function (data) {
+                        alert("Sửa không thành công!");
+                    },
+                    success: function (data) {
+                        alert("Sửa thành công!");
+                        GethoadonbanList();
+                        // xóa dữ liệu trên các ô vừa điền sau khi thêm mới thành công
+                        clearInput();
+                    }
+                });
+            }
+        }
+
+        //tim kiem theo ma
+        function search() {
+            var MaHDB = $("#timkiem").val();
+            if (MaHDB == "") {
+                alert("Vui lòng Bán mã hóa đơn !");
+                return;
+            }
+            $.ajax({
+                url: url + "hoadonban/" + MaHDB,
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                error: function (data) {
+                    alert("Không có hóa đơn cần tìm !");
+                    $("#timkiem").val("");
+                    console.log(0);
+                },
+                success: function (data) {
+                    let table = '';
+                    if (data.IsDeleted == 0) {
+                        table = table + '<td>' + data.MaHDB + '</td>';
+                        table = table + '<td>' + data.tblNV.TenNV + '</td>';
+                        table = table + '<td>' + data.NgayBan + '</td>';
+                        table = table + '<td>' + data.tblKhachHang.TenKH + '</td>';
+                        table = table + '<td> <a href="#form-nhap"<button type="button" class="btn btn-success btn-sm" onclick="GetHD(\'' + data.MaHDB + '\')">Chi tiết</button> </a></td>';
+                        table = table + '<td> <button type="button" class="btn btn-danger btn-sm"  onclick="XoaHD(\'' + data.MaHDB + '\')">Xóa</button> </td>';
+                        table = table + '</tr>';
+                    }
+                    
+                    document.getElementById('ALLhoadonban').innerHTML = table;
+
+                }
+            });
+        }
+        function XoaHD(MaHD) {
+            if (confirm("Bạn có chắc muốn xóa?")) {
+                $.ajax({
+                    url: url + "hoadonban?id=" + MaHD+"&&xoa=1",
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    error: function () {
+                        alert("Xóa các hóa đơn có mã hóa đơn: " + MaHD + " không thành công ! ");
+                    },
+                    success: function () {
+                        alert("Xóa các hóa đơn có mã hóa đơn: " + MaHD + " thành công!");
+                        GethoadonbanList();
+                    }
+                });  
+            }
+        }
+        //function DeleteChiTietHD(MaHD,MaSP) {
+        //    $.ajax({
+        //        url: url + "ChiTiethoadonbanBan/" + MaHD +"/"+ MaSP,
+        //        method: 'DELETE',
+        //        contentType: 'application/json',
+        //        dataType: 'json',
+        //        error: function () {
+        //            alert("Xóa các chi tiết hóa đơn có mã hóa đơn: " + MaHD + "không thành công ! ");
+        //        },
+        //        success: function () {
+        //            alert("Xóa các chi tiết hóa đơn có mã hóa đơn: " + MaHD + " thành công!");
+        //        }
+        //    })
+        //}
+
+    </script>
+</body>
+</html >
